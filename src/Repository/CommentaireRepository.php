@@ -44,7 +44,26 @@ class CommentaireRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
+    public function findAllByIdPub($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.publication = :val')
+            ->setParameter('val', $id)
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function findByIdPub($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.publication_id = :val')
+            ->setParameter('val', $id)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Commentaire[] Returns an array of Commentaire objects
     //  */
