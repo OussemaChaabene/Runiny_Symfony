@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PlanningCoach
  *
- * @ORM\Table(name="planning_coach", indexes={@ORM\Index(name="id_seance", columns={"id_seance"}), @ORM\Index(name="id_user", columns={"id_user"})})
+ * @ORM\Table(name="planning_coach", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="id_seance", columns={"id_seance"})})
  * @ORM\Entity
  */
 class PlanningCoach
@@ -22,16 +22,6 @@ class PlanningCoach
     private $idP;
 
     /**
-     * @var \Seance
-     *
-     * @ORM\ManyToOne(targetEntity="Seance")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_seance", referencedColumnName="id_seance")
-     * })
-     */
-    private $idSeance;
-
-    /**
      * @var \User
      *
      * @ORM\ManyToOne(targetEntity="User")
@@ -40,6 +30,16 @@ class PlanningCoach
      * })
      */
     private $idUser;
+
+    /**
+     * @var \Seance
+     *
+     * @ORM\ManyToOne(targetEntity="Seance")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_seance", referencedColumnName="id_seance")
+     * })
+     */
+    private $idSeance;
 
 
 }

@@ -2,110 +2,67 @@
 
 namespace App\Entity;
 
-use App\Repository\RegimeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=RegimeRepository::class)
+ * Regime
+ *
+ * @ORM\Table(name="regime")
+ * @ORM\Entity
  */
 class Regime
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255, nullable=false)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="niveau", type="integer", nullable=false)
      */
     private $niveau;
 
     /**
-     * @ORM\ManyToMany(targetEntity=plat::class, inversedBy="regimes")
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Plat", inversedBy="regime")
+     * @ORM\JoinTable(name="regime_plat",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="regime_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="plat_id", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $plats;
-
-    public function __construct()
-    {
-        $this->plats = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
-
-    public function setTitre(string $titre): self
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getNiveau(): ?int
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(int $niveau): self
-    {
-        $this->niveau = $niveau;
-
-        return $this;
-    }
+    private $plat;
 
     /**
-     * @return Collection<int, plat>
+     * Constructor
      */
-    public function getPlats(): Collection
+    public function __construct()
     {
-        return $this->plats;
+        $this->plat = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function addPlat(plat $plat): self
-    {
-        if (!$this->plats->contains($plat)) {
-            $this->plats[] = $plat;
-        }
-
-        return $this;
-    }
-
-    public function removePlat(plat $plat): self
-    {
-        $this->plats->removeElement($plat);
-
-        return $this;
-    }
 }
