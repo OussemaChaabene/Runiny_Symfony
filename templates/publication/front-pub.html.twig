@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <section class="section" id="trainers">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2><em>Publications</em></h2>
+                        <img src="{{ asset('assets/images/line-dec.png') }}" alt="">
+                        <p>Publier, liker et interagisser avec nos autres membres.</p>
+                    </div>
+                </div>
+            </div>
+            {% for pub in publications %}
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="trainer-item">
+                        <div class="image-thumb">
+                            <img src="{{ asset(pub.image) }}" alt="">
+                        </div>
+                        <div class="down-content">
+                            <span>{{ pub.adresse }}</span>
+                            <h4>{{ pub.nom }}</h4>
+                            <p>{{ pub.description }}</p>
+                            <span>{{ pub.datecreation|date('Y-m-d') }}</span>
+                            <a href="{{ path('app_publication_front_show', {'id': pub.id}) }}" class="read-more">Voir Plus <i class="fa fa-angle-right"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- ***** Testimonials Ends ***** -->
+{% endblock %}
