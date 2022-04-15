@@ -1,0 +1,13 @@
+{% extends 'indexx.html.twig' %}
+
+{% block title %}Edit Abonnement{% endblock %}
+
+{% block body %}
+    <h1>Edit Abonnement</h1>
+
+    {{ include('categorieabo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_categorieabo_index') }}">Retour</a>
+
+    {{ include('categorieabo/_delete_form.html.twig') }}
+{% endblock %}

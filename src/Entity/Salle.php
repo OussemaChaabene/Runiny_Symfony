@@ -42,5 +42,51 @@ class Salle
      */
     private $rating;
 
+    public function getIdSalle(): ?int
+    {
+        return $this->idSalle;
+    }
+
+    public function getAdressSalle(): ?string
+    {
+        return $this->adressSalle;
+    }
+
+    public function setAdressSalle(string $adressSalle): self
+    {
+        $this->adressSalle = $adressSalle;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
 
 }

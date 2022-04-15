@@ -22,6 +22,16 @@ class PlanningCoach
     private $idP;
 
     /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     * })
+     */
+    private $idUser;
+
+    /**
      * @var \Seance
      *
      * @ORM\ManyToOne(targetEntity="Seance")
@@ -31,15 +41,34 @@ class PlanningCoach
      */
     private $idSeance;
 
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
-     * })
-     */
-    private $idUser;
+    public function getIdP(): ?int
+    {
+        return $this->idP;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getIdSeance(): ?Seance
+    {
+        return $this->idSeance;
+    }
+
+    public function setIdSeance(?Seance $idSeance): self
+    {
+        $this->idSeance = $idSeance;
+
+        return $this;
+    }
 
 
 }

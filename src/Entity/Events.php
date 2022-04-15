@@ -49,5 +49,58 @@ class Events
      */
     private $prix;
 
+    public function getIdeven(): ?int
+    {
+        return $this->ideven;
+    }
+
+    public function getDateeven(): ?\DateTimeInterface
+    {
+        return $this->dateeven;
+    }
+
+    public function setDateeven(\DateTimeInterface $dateeven): self
+    {
+        $this->dateeven = $dateeven;
+
+        return $this;
+    }
+
+    public function getDescri(): ?string
+    {
+        return $this->descri;
+    }
+
+    public function setDescri(string $descri): self
+    {
+        $this->descri = $descri;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
 
 }
