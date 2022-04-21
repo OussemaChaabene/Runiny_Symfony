@@ -21,7 +21,7 @@ class CaracController extends AbstractController
     public function index(CaracSportRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-            'caracs' => $csr->findAll(),
+            'carac' => $csr->findById(1),
         ]);
     }
 
@@ -47,5 +47,46 @@ class CaracController extends AbstractController
 
     }
 
+    /**
+     * @Route("/carac/{id}", name="club_show", methods={"GET"})
+     */
+    public function show(CaracSport $carac): Response
+    {
+        return $this->render('carac/index.html.twig', [
+            'carac' => $carac,
+        ]);
+    }
 
+    /**
+     * @Route("/suppCarac/{id}", name="suppCarac")
+     */
+    public function supprimerCarac(CaracSport  $c): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($c);
+        $em->flush();
+
+        return $this->redirectToRoute('app_carac');
+    }
+
+    /**
+     * @Route("/modifCarac/{id}", name="modifCarac")
+     */
+    public function modifierCarac($id,Request $request): Response
+    {
+        $carac = $this->getDoctrine()->getManager()->getRepository(CaracSport::class)->find($id);
+
+        $form = $this->createForm(PlatType::class,$carac);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('app_carac');
+        }
+        return $this->render('plat/updateCarac.html.twig',['f'=>$form->createView()]);
+
+    }
 }

@@ -15,8 +15,6 @@ class CaracType extends AbstractType
             ->add('taille')
             ->add('poids')
             ->add('age')
-            ->add('prot_needs')
-            ->add('calorie_need')
             ->add('Ajouter',SubmitType::class)
 
         ;

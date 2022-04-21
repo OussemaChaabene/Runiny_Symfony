@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Plat
@@ -25,6 +26,8 @@ class Plat
 
     /**
      * @var string
+     * @Assert\NotBlank(message=" Veuillez saisir un nom")
+     *
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
@@ -32,6 +35,8 @@ class Plat
 
     /**
      * @var int
+     * @Assert\NotNull(message=" Veuillez saisir un poids")
+     *
      *
      * @ORM\Column(name="poids", type="integer", nullable=false)
      */
@@ -39,6 +44,8 @@ class Plat
 
     /**
      * @var int
+     * @Assert\NotNull(message=" Veuillez saisir la quantité de sodium")
+     *
      *
      * @ORM\Column(name="sodium", type="integer", nullable=false)
      */
@@ -46,6 +53,8 @@ class Plat
 
     /**
      * @var int
+     * @Assert\NotNull(message=" Veuillez saisir la quantité de cholesterol")
+     *
      *
      * @ORM\Column(name="cholesterol", type="integer", nullable=false)
      */
@@ -53,6 +62,8 @@ class Plat
 
     /**
      * @var int
+     * @Assert\NotNull(message=" Veuillez saisir la quantité de carbohydrate")
+     *
      *
      * @ORM\Column(name="carbohydrate", type="integer", nullable=false)
      */
@@ -60,6 +71,8 @@ class Plat
 
     /**
      * @var int
+     * @Assert\NotNull(message=" Veuillez saisir la quantité de protein")
+     *
      *
      * @ORM\Column(name="protein", type="integer", nullable=false)
      */
@@ -67,6 +80,8 @@ class Plat
 
     /**
      * @var int
+     * @Assert\NotNull(message=" Veuillez saisir les calories ")
+     *
      *
      * @ORM\Column(name="calories", type="integer", nullable=false)
      */

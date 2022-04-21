@@ -44,7 +44,13 @@ class CaracSportRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
+    public function findById($id){
+        $query=$this->getEntityManager()
+            ->createQuery('SELECT c FROM App\Entity\CaracSport c WHERE
+             c.id = :idc')
+            ->setParameter('idc','%'.$id.'%');
+        return $query->getResult();
+    }
     // /**
     //  * @return CaracSport[] Returns an array of CaracSport objects
     //  */

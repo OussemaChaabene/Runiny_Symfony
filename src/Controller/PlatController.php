@@ -44,7 +44,7 @@ class PlatController extends AbstractController
     /**
      * @Route("/suppPlat/{id}", name="suppPlat")
      */
-    public function supprimerCarac(Plat  $p): Response
+    public function supprimerPlat(Plat  $p): Response
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($p);
@@ -71,9 +71,6 @@ class PlatController extends AbstractController
             return $this->redirectToRoute('app_plat');
         }
         return $this->render('plat/updatePlat.html.twig',['f'=>$form->createView()]);
-
-
-
 
     }
 
