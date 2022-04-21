@@ -52,5 +52,58 @@ class Abonnement
      */
     private $idSalle;
 
+    public function getAbId(): ?int
+    {
+        return $this->abId;
+    }
+
+    public function getAbNom(): ?string
+    {
+        return $this->abNom;
+    }
+
+    public function setAbNom(string $abNom): self
+    {
+        $this->abNom = $abNom;
+
+        return $this;
+    }
+
+    public function getAbType(): ?string
+    {
+        return $this->abType;
+    }
+
+    public function setAbType(string $abType): self
+    {
+        $this->abType = $abType;
+
+        return $this;
+    }
+
+    public function getAbPrix(): ?int
+    {
+        return $this->abPrix;
+    }
+
+    public function setAbPrix(int $abPrix): self
+    {
+        $this->abPrix = $abPrix;
+
+        return $this;
+    }
+
+    public function getIdSalle(): ?Salle
+    {
+        return $this->idSalle;
+    }
+
+    public function setIdSalle(?Salle $idSalle): self
+    {
+        $this->idSalle = $idSalle;
+
+        return $this;
+    }
+
 
 }

@@ -41,5 +41,40 @@ class PlatController extends AbstractController
         return $this->render('plat/createPlat.html.twig',['f'=>$form->createView()]);
 
     }
+    /**
+     * @Route("/suppPlat/{id}", name="suppPlat")
+     */
+    public function supprimerCarac(Plat  $p): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($p);
+        $em->flush();
+
+        return $this->redirectToRoute('app_plat');
+    }
+
+    /**
+     * @Route("/modifPlat/{id}", name="modifPlat")
+     */
+    public function modifierPlat(Plat $p,$id): Response
+    {
+        $p = $this->getDoctrine()->getManager()->getRepository(Plat::class)->find($id);
+
+        $form = $this->createForm(CaracType::class,$p);
+
+        $form->handleRequest($p);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('app_plat');
+        }
+        return $this->render('carac/updateCarac.html.twig',['f'=>$form->createView()]);
+
+
+
+
+    }
 
 }

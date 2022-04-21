@@ -6,6 +6,8 @@ use App\Entity\CaracSport;
 use App\Entity\Plat;
 use App\Form\CaracType;
 use App\Form\PlatType;
+use App\Repository\CaracSportRepository;
+use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,15 +18,15 @@ class CaracController extends AbstractController
     /**
      * @Route("/carac", name="app_carac")
      */
-    public function index(): Response
+    public function index(CaracSportRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-            'controller_name' => 'CaracController',
+            'caracs' => $csr->findAll(),
         ]);
     }
 
     /**
-     * @Route("/addCarac", name="addPlat")
+     * @Route("/addCarac", name="addCarac")
      */
     public function addCarac(Request $request): Response
     {
@@ -41,7 +43,9 @@ class CaracController extends AbstractController
 
             return $this->redirectToRoute('app_carac');
         }
-        return $this->render('plat/createCarac.html.twig',['f'=>$form->createView()]);
+        return $this->render('carac/createCarac.html.twig',['f'=>$form->createView()]);
 
     }
+
+
 }

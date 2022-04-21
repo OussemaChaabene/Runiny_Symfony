@@ -58,5 +58,58 @@ class Reservation
      */
     private $idUser;
 
+    public function getIdReser(): ?int
+    {
+        return $this->idReser;
+    }
+
+    public function getDateRes(): ?string
+    {
+        return $this->dateRes;
+    }
+
+    public function setDateRes(string $dateRes): self
+    {
+        $this->dateRes = $dateRes;
+
+        return $this;
+    }
+
+    public function getIdEven(): ?Evenement
+    {
+        return $this->idEven;
+    }
+
+    public function setIdEven(?Evenement $idEven): self
+    {
+        $this->idEven = $idEven;
+
+        return $this;
+    }
+
+    public function getIdSalle(): ?Salle
+    {
+        return $this->idSalle;
+    }
+
+    public function setIdSalle(?Salle $idSalle): self
+    {
+        $this->idSalle = $idSalle;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
 
 }

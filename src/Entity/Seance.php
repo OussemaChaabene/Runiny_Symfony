@@ -42,5 +42,46 @@ class Seance
      */
     private $typeSeance;
 
+    public function getIdSeance(): ?int
+    {
+        return $this->idSeance;
+    }
+
+    public function getDate(): ?int
+    {
+        return $this->date;
+    }
+
+    public function setDate(int $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getHeur(): ?int
+    {
+        return $this->heur;
+    }
+
+    public function setHeur(int $heur): self
+    {
+        $this->heur = $heur;
+
+        return $this;
+    }
+
+    public function getTypeSeance(): ?int
+    {
+        return $this->typeSeance;
+    }
+
+    public function setTypeSeance(int $typeSeance): self
+    {
+        $this->typeSeance = $typeSeance;
+
+        return $this;
+    }
+
 
 }

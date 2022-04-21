@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Plat;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,7 +20,6 @@ class PlatType extends AbstractType
             ->add('carbohydrate')
             ->add('protein')
             ->add('calories')
-            ->add('regime')
             ->add('Ajouter',SubmitType::class)
 
         ;

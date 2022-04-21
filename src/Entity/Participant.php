@@ -35,5 +35,34 @@ class Participant
      */
     private $idUser;
 
+    public function getIdParti(): ?int
+    {
+        return $this->idParti;
+    }
+
+    public function getIdevent(): ?int
+    {
+        return $this->idevent;
+    }
+
+    public function setIdevent(int $idevent): self
+    {
+        $this->idevent = $idevent;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(int $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
 
 }

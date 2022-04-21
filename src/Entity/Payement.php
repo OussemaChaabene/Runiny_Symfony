@@ -55,5 +55,58 @@ class Payement
      */
     private $idUser;
 
+    public function getIdPay(): ?int
+    {
+        return $this->idPay;
+    }
+
+    public function getMontant(): ?int
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(int $montant): self
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getDatePay(): ?string
+    {
+        return $this->datePay;
+    }
+
+    public function setDatePay(string $datePay): self
+    {
+        $this->datePay = $datePay;
+
+        return $this;
+    }
+
+    public function getAb(): ?Abonnement
+    {
+        return $this->ab;
+    }
+
+    public function setAb(?Abonnement $ab): self
+    {
+        $this->ab = $ab;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
 
 }

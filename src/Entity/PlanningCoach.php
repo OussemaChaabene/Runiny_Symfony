@@ -41,5 +41,34 @@ class PlanningCoach
      */
     private $idSeance;
 
+    public function getIdP(): ?int
+    {
+        return $this->idP;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getIdSeance(): ?Seance
+    {
+        return $this->idSeance;
+    }
+
+    public function setIdSeance(?Seance $idSeance): self
+    {
+        $this->idSeance = $idSeance;
+
+        return $this;
+    }
+
 
 }

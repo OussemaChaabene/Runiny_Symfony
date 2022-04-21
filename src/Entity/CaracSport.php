@@ -96,5 +96,46 @@ class CaracSport
         return $this;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTaille(): ?int
+    {
+        return $this->taille;
+    }
+
+    public function setTaille(int $taille): self
+    {
+        $this->taille = $taille;
+
+        return $this;
+    }
+
+    public function getPoids(): ?int
+    {
+        return $this->poids;
+    }
+
+    public function setPoids(int $poids): self
+    {
+        $this->poids = $poids;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 
 }

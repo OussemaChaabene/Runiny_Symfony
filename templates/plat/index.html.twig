@@ -6,36 +6,58 @@
     <div class="superx">
     <section class="section">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="row-cols-lg-auto">
 
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Plats Disponibles</h5>
 
                         <!-- Table with stripped rows -->
-                        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns"><div class="dataTable-top"><div class="dataTable-dropdown"><label><select class="dataTable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page</label></div><div class="dataTable-search"><input class="dataTable-input" placeholder="Search..." type="text"></div></div><div class="dataTable-container"><table class="table datatable dataTable-table">
+                        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns" >
+                            <div class="dataTable-top">
+                                <div class="dataTable-dropdown"><label><select class="dataTable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page</label></div><div class="dataTable-search"><input class="dataTable-input" placeholder="Search..." type="text"></div></div>
+                            <div class="dataTable-container">
+                                <table class="table datatable dataTable-table">
                                     <thead>
                                     <tr>
-                                        <th scope="col" data-sortable="" style="width: 27.6801%;"><a href="#" class="dataTable-sorter">Nom</a></th>
-                                        <th scope="col" data-sortable="" style="width: 35.5888%;"><a href="#" class="dataTable-sorter">Poids</a></th>
+                                        <th scope="col" data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">Nom</a></th>
+                                        <th scope="col" data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">Poids</a></th>
                                         <th scope="col" data-sortable="" style="width: 10.9842%;"><a href="#" class="dataTable-sorter">Calories</a></th>
-                                        <th scope="col" data-sortable="" style="width: 19.1125%;"><a href="#" class="dataTable-sorter">Fats</a></th></tr>
+                                        <th scope="col" data-sortable="" style="width: 12.1125%;"><a href="#" class="dataTable-sorter">Protein</a></th>
+                                        <th scope="col" data-sortable="" style="width: 12%;"><a href="#" class="dataTable-sorter">Sodium</a></th>
+                                        <th scope="col" data-sortable="" style="width: 19.1125%;"><a href="#" class="dataTable-sorter">Carbohydrate</a></th>
+                                        <th scope="col" data-sortable="" style="width: 19.1125%;"><a href="#" class="dataTable-sorter">Cholesterol</a></th>
+                                        <th scope="col"  style="width: 20%;"><a class="dataTable">Action</a></th>
+
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     {% for p in plats %}
                                     <tr>
                                         <td>{{ p.nom }}</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td></tr>
+                                        <td>{{ p.poids }}</td>
+                                        <td>{{ p.calories }}</td>
+                                        <td>{{ p.protein }}</td>
+                                        <td>{{ p.sodium }}</td>
+                                        <td>{{ p.carbohydrate }}</td>
+                                        <td>{{ p.cholesterol }}</td>
+                                        <td><div class="btn-group" role="group" aria-label="Basic example" style="width: 20%">
+                                                <button  type="button"  class="btn btn-primary" href="{{ path('modifPlat', {'id': p.id}) }}">Modifier</button>
+                                                <button type="button" class="btn btn-primary" href="{{ path('suppPlat' , {'id': p.id}) }}">Supprimer</button>
+                                                <button type="button" class="btn btn-primary">Afficher</button>
+
+                                            </div></td>
+                                    </tr>
                                     {% else %}
                                         <tr>
                                             <td colspan="6">no records found</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
-                                </table></div><div class="dataTable-bottom"><div class="dataTable-info">Showing 1 to 5 of 5 entries</div><nav class="dataTable-pagination"><ul class="dataTable-pagination-list"></ul></nav></div></div>
-                        <!-- End Table with stripped rows -->
+                                </table></div>
+                            <div class="dataTable-bottom"><nav class="dataTable-pagination"><ul class="dataTable-pagination-list"></ul></nav></div>
+                        </div>
+                        <a href="{{ path('addPlat') }}" ><button type="button" class="btn btn-primary">Ajouter</button></a>
 
                     </div>
                 </div>

@@ -52,5 +52,58 @@ class Evenement
      */
     private $idSalle;
 
+    public function getIdEven(): ?int
+    {
+        return $this->idEven;
+    }
+
+    public function getDescri(): ?string
+    {
+        return $this->descri;
+    }
+
+    public function setDescri(string $descri): self
+    {
+        $this->descri = $descri;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getNomEven(): ?string
+    {
+        return $this->nomEven;
+    }
+
+    public function setNomEven(string $nomEven): self
+    {
+        $this->nomEven = $nomEven;
+
+        return $this;
+    }
+
+    public function getIdSalle(): ?Salle
+    {
+        return $this->idSalle;
+    }
+
+    public function setIdSalle(?Salle $idSalle): self
+    {
+        $this->idSalle = $idSalle;
+
+        return $this;
+    }
+
 
 }

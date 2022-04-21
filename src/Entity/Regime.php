@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,6 +65,71 @@ class Regime
     public function __construct()
     {
         $this->plat = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?int
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(int $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Plat>
+     */
+    public function getPlat(): Collection
+    {
+        return $this->plat;
+    }
+
+    public function addPlat(Plat $plat): self
+    {
+        if (!$this->plat->contains($plat)) {
+            $this->plat[] = $plat;
+        }
+
+        return $this;
+    }
+
+    public function removePlat(Plat $plat): self
+    {
+        $this->plat->removeElement($plat);
+
+        return $this;
     }
 
 }
