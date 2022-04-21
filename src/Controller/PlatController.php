@@ -56,13 +56,13 @@ class PlatController extends AbstractController
     /**
      * @Route("/modifPlat/{id}", name="modifPlat")
      */
-    public function modifierPlat(Plat $p,$id): Response
+    public function modifierPlat($id,Request $request): Response
     {
-        $p = $this->getDoctrine()->getManager()->getRepository(Plat::class)->find($id);
+        $plat = $this->getDoctrine()->getManager()->getRepository(Plat::class)->find($id);
 
-        $form = $this->createForm(CaracType::class,$p);
+        $form = $this->createForm(PlatType::class,$plat);
 
-        $form->handleRequest($p);
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -70,7 +70,7 @@ class PlatController extends AbstractController
 
             return $this->redirectToRoute('app_plat');
         }
-        return $this->render('carac/updateCarac.html.twig',['f'=>$form->createView()]);
+        return $this->render('plat/updatePlat.html.twig',['f'=>$form->createView()]);
 
 
 

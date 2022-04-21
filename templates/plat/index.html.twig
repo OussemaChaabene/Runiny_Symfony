@@ -27,7 +27,7 @@
                                         <th scope="col" data-sortable="" style="width: 12%;"><a href="#" class="dataTable-sorter">Sodium</a></th>
                                         <th scope="col" data-sortable="" style="width: 19.1125%;"><a href="#" class="dataTable-sorter">Carbohydrate</a></th>
                                         <th scope="col" data-sortable="" style="width: 19.1125%;"><a href="#" class="dataTable-sorter">Cholesterol</a></th>
-                                        <th scope="col"  style="width: 20%;"><a class="dataTable">Action</a></th>
+                                        <th scope="col"  style="width: 20%; position: center"><a class="dataTable">Action</a></th>
 
                                     </tr>
                                     </thead>
@@ -42,8 +42,8 @@
                                         <td>{{ p.carbohydrate }}</td>
                                         <td>{{ p.cholesterol }}</td>
                                         <td><div class="btn-group" role="group" aria-label="Basic example" style="width: 20%">
-                                                <button  type="button"  class="btn btn-primary" href="{{ path('modifPlat', {'id': p.id}) }}">Modifier</button>
-                                                <button type="button" class="btn btn-primary" href="{{ path('suppPlat' , {'id': p.id}) }}">Supprimer</button>
+                                                <button  type="button"  class="btn btn-primary" ><a  href="{{ path('modifPlat', {'id': p.id}) }}">Modifier</a></button>
+                                                <button type="button" class="btn btn-primary" ><a href="{{ path('suppPlat' , {'id': p.id}) }}">Supprimer</a></button>
                                                 <button type="button" class="btn btn-primary">Afficher</button>
 
                                             </div></td>
