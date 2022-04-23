@@ -21,7 +21,7 @@ class CaracController extends AbstractController
     public function index(CaracSportRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-            'carac' => $csr->findById(1),
+            'carac' => $csr->findOneBy(array('id'=>2)),
         ]);
     }
 
@@ -50,10 +50,10 @@ class CaracController extends AbstractController
     /**
      * @Route("/carac/{id}", name="club_show", methods={"GET"})
      */
-    public function show(CaracSport $carac): Response
+    public function show(CaracSportRepository $csr,$id): Response
     {
         return $this->render('carac/index.html.twig', [
-            'carac' => $carac,
+            'carac' => $csr->findOneBy(array('id'=>$id)),
         ]);
     }
 

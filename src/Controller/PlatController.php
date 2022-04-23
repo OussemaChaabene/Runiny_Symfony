@@ -20,6 +20,17 @@ class PlatController extends AbstractController
             'plats' => $pr->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/plat/{id}", name="showPlat")
+     */
+    public function showPlat(PlatRepository $pr,$id): Response
+    {
+        return $this->render('plat/show.html.twig', [
+            'plat' => $pr->findOneBy(array('id'=>$id)),
+        ]);
+    }
+
     /**
      * @Route("/addPlat", name="addPlat")
      */
@@ -41,6 +52,7 @@ class PlatController extends AbstractController
         return $this->render('plat/createPlat.html.twig',['f'=>$form->createView()]);
 
     }
+
     /**
      * @Route("/suppPlat/{id}", name="suppPlat")
      */

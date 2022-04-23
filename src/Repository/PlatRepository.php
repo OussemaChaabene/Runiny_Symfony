@@ -45,6 +45,15 @@ class PlatRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findByName($name){
+        $query=$this->getEntityManager()
+            ->createQuery('SELECT c FROM App\Entity\Plat WHERE
+             c.nom Like :name')
+            ->setParameter('name','%'.$name.'%');
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Plat[] Returns an array of Plat objects
     //  */
