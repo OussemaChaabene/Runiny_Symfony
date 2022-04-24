@@ -2,12 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Plat;
 use App\Entity\Regime;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 
 class RegimeType extends AbstractType
 {
@@ -15,13 +16,19 @@ class RegimeType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+    'choices' => [
+        'Perte de poids' => 'Perte de poids',
+        'Gain de poids' => 'Gain de poids',]
+    ])
             ->add('niveau')
-            ->add('plat', ChoiceType::class, [
-                'required' => true,
-                'multiple'=> true,
-                'choice_name' => ChoiceList::fieldName($this, 'nom'),
-            ]);
+            ->add('plat', EntityType::class, [
+                'class' => Plat::class,
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => 'nom',
+
+            ])
         ;
     }
 
