@@ -4,10 +4,24 @@
 
 {% block body %}
     <h1>Edit Regime</h1>
+<div class="superx">
+    <section class="section w-75">
+        <div class="row">
+            <div class="row-cols-lg-auto">
 
-    {{ include('regime/_form.html.twig', {'button_label': 'Update'}) }}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Modifier Regimes : {{ regime.titre }}</h5>
+
+                        {{ include('regime/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_regime_index') }}">back to list</a>
 
     {{ include('regime/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}

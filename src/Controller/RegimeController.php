@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Plat;
 use App\Entity\Regime;
 use App\Form\RegimeType;
+use App\Form\SearchPatType;
+use App\Form\SearchRegimeType;
+use App\Repository\RegimeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,17 +21,40 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegimeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_regime_index", methods={"GET"})
+     * @Route("/", name="app_regime_index", methods={"GET", "POST"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,Request $request, RegimeRepository $rr, PaginatorInterface $paginator): Response
     {
-        $regimes = $entityManager
+    /*    $regimes = $entityManager
             ->getRepository(Regime::class)
             ->findAll();
 
         return $this->render('regime/index.html.twig', [
             'regimes' => $regimes,
-        ]);
+        ]);*/
+        $propertySearch = new Regime();
+        $form = $this->createForm(SearchRegimeType::class,$propertySearch);
+        $form->handleRequest($request);
+        $regimes = $entityManager
+            ->getRepository(Regime::class)
+            ->findAll();
+
+        if($form->isSubmitted() && $form->isValid()) {
+            //on récupère le nom d'article tapé dans le formulaire
+            $nregimes = $propertySearch->getTitre();
+            if ($nregimes!="")
+                //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+                $regimes= $rr->findBy(['titre' => $regimes] );
+            else
+                //si si aucun nom n'est fourni on affiche tous les articles
+                $regimes= $rr->findAll();
+        }
+        $pl = $paginator->paginate(
+            $regimes, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5// Nombre de résultats par page
+        );
+        return  $this->render('regime/index.html.twig',[ 'form' =>$form->createView(), 'regimes' => $pl]);
     }
 
     /**
