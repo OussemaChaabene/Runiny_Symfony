@@ -14,9 +14,15 @@
 
                         <!-- Table with stripped rows -->
                         <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns" >
-                            <div class="dataTable-top">
-                                <div class="dataTable-dropdown"><label><select class="dataTable-selector"><option value="5">5</option><option value="10" selected="">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option></select> entries per page</label></div><div class="dataTable-search"><input class="dataTable-input" placeholder="Search..." type="text"></div></div>
-                            <div class="dataTable-container">
+                            <div class="dataTable-top w-25 position-absolute top-0 end-0">
+                                {{ form_start(form) }}
+                                <div class="dataTable-search" >{{ form_row(form.nom) }}</div><div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+
+                            <div class="dataTable-container mt-5">
                                 <table class="table datatable dataTable-table">
                                     <thead>
                                     <tr>

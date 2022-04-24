@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Plat;
+use App\Form\SearchPatType;
 use App\Repository\PlatRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,7 @@ class PlatController extends AbstractController
      * @Route("/plat", name="app_plat")
      */
     public function index(Request $request,PlatRepository $pr, PaginatorInterface $paginator): Response
-    {
+    {/*
         $donnees=$pr->findAll();
         $plats = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
@@ -26,7 +27,30 @@ class PlatController extends AbstractController
 
         return $this->render('plat/index.html.twig', [
             'plats' => $plats,
-        ]);
+        ]);*/
+        $propertySearch = new Plat();
+        $form = $this->createForm(SearchPatType::class,$propertySearch);
+        $form->handleRequest($request);
+        //initialement le tableau des articles est vide,
+        //c.a.d on affiche les articles que lorsque l'utilisateur clique sur le bouton rechercher
+        $plats= [];
+
+        if($form->isSubmitted() && $form->isValid()) {
+            //on récupère le nom d'article tapé dans le formulaire
+            $nom = $propertySearch->getNom();
+            if ($nom!="")
+                //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
+                $plats= $pr->findBy(['nom' => $nom] );
+            else
+                //si si aucun nom n'est fourni on affiche tous les articles
+                $plats= $pr->findAll();
+        }
+        $pl = $paginator->paginate(
+            $plats, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5// Nombre de résultats par page
+        );
+        return  $this->render('plat/index.html.twig',[ 'form' =>$form->createView(), 'plats' => $pl]);
     }
 
     /**
