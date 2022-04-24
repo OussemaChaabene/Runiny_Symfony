@@ -63,6 +63,11 @@ class CaracSport
 
     protected $captchaCode;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $genre;
+
     public function getCaptchaCode()
     {
         return $this->captchaCode;
@@ -145,6 +150,18 @@ class CaracSport
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
 
         return $this;
     }

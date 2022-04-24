@@ -6,6 +6,7 @@ use App\Entity\CaracSport;
 use App\Entity\Plat;
 use App\Form\CaracType;
 use App\Form\PlatType;
+use App\metier\caracMetier;
 use App\Repository\CaracSportRepository;
 use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +39,10 @@ class CaracController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($carac);
+
+            $cm = new caracMetier();
+
+            $em->persist($cm->calculCarac($carac));
             $em->flush();
 
             return $this->redirectToRoute('app_carac');

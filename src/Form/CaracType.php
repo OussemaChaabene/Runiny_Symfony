@@ -18,6 +18,7 @@ class CaracType extends AbstractType
             ->add('taille')
             ->add('poids')
             ->add('age')
+            ->add('genre')
             ->add('Ajouter',SubmitType::class)
             ->add('captchaCode', CaptchaType::class, array(
                 'captchaConfig' => 'ExampleCaptchaUserRegistration',
