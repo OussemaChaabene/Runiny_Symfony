@@ -55,6 +55,7 @@
                                     {% endfor %}
                                     </tbody>
                                 </table></div>
+                            {{ knp_pagination_render(plats) }}
                             <div class="dataTable-bottom"><nav class="dataTable-pagination"><ul class="dataTable-pagination-list"></ul></nav></div>
                         </div>
                         <a href="{{ path('addPlat') }}" ><button type="button" class="btn btn-primary">Ajouter</button></a>

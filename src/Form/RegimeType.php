@@ -21,7 +21,15 @@ class RegimeType extends AbstractType
         'Perte de poids' => 'Perte de poids',
         'Gain de poids' => 'Gain de poids',]
     ])
-            ->add('niveau')
+            ->add('niveau',ChoiceType::class, [
+                'choices'  => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                ],
+            ])
             ->add('plat', EntityType::class, [
                 'class' => Plat::class,
                 'multiple' => true,
