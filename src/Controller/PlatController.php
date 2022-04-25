@@ -53,6 +53,16 @@ class PlatController extends AbstractController
         return  $this->render('plat/index.html.twig',[ 'form' =>$form->createView(), 'plats' => $pl]);
     }
 
+
+    /**
+     * @Route("/plat/try", name="plat_try")
+     */
+    public function try(): Response
+    {
+        return $this->render('front/index.html.twig', [
+            'controller_name' => 'thisController',
+        ]);
+    }
     /**
      * @Route("/plat/{id}", name="showPlat")
      */
