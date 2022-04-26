@@ -84,6 +84,8 @@ class RegimeController extends AbstractController
      */
     public function show(Regime $regime): Response
     {
+
+
         return $this->render('regime/show.html.twig', [
             'regime' => $regime,
         ]);

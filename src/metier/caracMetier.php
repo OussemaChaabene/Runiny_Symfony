@@ -11,7 +11,8 @@ class caracMetier
         $cn =0;
         $pn=0;
 
-        $pn=(0.8*$cs->getPoids());
+        //0.8 x poids
+        $pn=(2*$cs->getPoids());
         if($cs->getGenre()=="homme"){
             //$cn=(10 x $) + (6,25 x Taille en cm) - (5 x âge en années) + 5
             $cn=((10*$cs->getPoids())+(6.25*$cs->getTaille())-(5*$cs->getAge())+5);

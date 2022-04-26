@@ -69,4 +69,6 @@ class StripeController extends AbstractController
     {
         return $this->render('payement/cancel.html.twig', []);
     }
+
+
 }
