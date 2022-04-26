@@ -1,24 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'basef.html.twig' %}
 
-{% block title %}Regime index{% endblock %}
+{% block title %}Regimes{% endblock %}
 
 {% block body %}
-    <div class="superx">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Regimes</h5>
+                <!--search_card-->
+                <div class="utf_left_side">
+                <div class="add_utf_listing_section ">
+                    <div class="utf_add_listing_part_headline_part">
+                        <h3><i class="sl sl-icon-magnifier"></i> Recherche</h3>
+                    </div>
+                    <div class="row with-forms">
+                        <div class="col-md-12">
+                            <div class="form-group lis-relative">
+                                <div class="dataTable-top w-25 position-absolute top-0 end-0">
+                                    {{ form_start(form) }}
+                                    <div class="row">
+                                        <div class="search-field" >{{ form_row(form.titre) }}</div>
+                                        <div class="form-group col-sm">
+                                            <button type="submit" class="button add-pricing-list-item">Rechercher</button>
+                                        </div>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!--search_card_end-->
 
-        <div class="dataTable-top w-25 position-absolute top-0 end-0">
-            {{ form_start(form) }}
-            <div class="row">
-            <div class="dataTable-search col-sm" >{{ form_row(form.titre) }}</div>
-            <div class="form-group col-sm">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
-            </div></div>
-            {{ form_end(form) }}
-        </div>
-
-    <table class="table datatable dataTable-table mt-5">
+<!--table-->
+                <div class="col-lg-12 col-md-12 mb-4">
+                    <div class="utf_dashboard_list_box table-responsive recent_booking">
+                        <div class="dashboard-list-box table-responsive invoices with-icons">
+                            <table class="table table-hover">
         <thead>
             <tr>
                 <th>Titre</th>
@@ -44,11 +61,20 @@
             </tr>
         {% endfor %}
         </tbody>
+                                <div class="mt-2 mb-2">
+                                    {{ knp_pagination_render(regimes) }}
+                                </div>
     </table>
+                        </div>
+                    </div>
+                </div>
+<!--end_table-->
 
-                {{ knp_pagination_render(regimes) }}
-    <a href="{{ path('app_regime_new') }}">Create new</a>
+                <br>
+
+                <br>
+    <a href="{{ path('app_regime_new') }}" class="button add-pricing-list-item utf_right_side"><i class=" fa-plus-square-o"> </i>Creer un regime</a>
     </div>
         </div>
-    </div>
+
 {% endblock %}

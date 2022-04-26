@@ -2,13 +2,16 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
+{# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+
 <!-- Mirrored from ulisting.utouchdesign.com/ulisting_ltr/blog_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 24 Mar 2022 15:37:01 GMT -->
 <head>
     <meta name="author" content="">
     <meta name="description" content="">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>:: U-Listing Directory - Listing HTML Template ::</title>
+    <title>Runniny</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('assets1/images/favicon.png') }}">
@@ -35,7 +38,9 @@
 
 <!-- Wrapper -->
 <div id="main_wrapper">
-    <header id="header_part">
+    {% block header %}
+
+        <header id="header_part">
         <div id="header">
             <div class="container">
                 <div class="utf_left_side">
@@ -52,7 +57,7 @@
 
                             <li><a class="current" href="#">Blog</a>
                                 <ul>
-                                    <li><a class="active" href="blog_page.html">Blog Grid</a></li>
+                                    <li><a class="active" href="blog_page.html"></a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Pages</a>
@@ -174,27 +179,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Blog Grid Layout</h2>
-                    <nav id="breadcrumbs">
-                        <ul>
-                            <li><a href="index_1.html">Home</a></li>
-                            <li>Blog Grid Layout</li>
-                        </ul>
-                    </nav>
+                    <h2>{% block title %}Welcome!{% endblock %}</h2>
+
                 </div>
             </div>
         </div>
     </div>
-
+    {% endblock %}
+    {% block body %}
     <div class="container">
         <div class="blog-page">
-your containt here !!
+
+
+
+                your containt here !!
+
+            {% endblock %}
         </div>
     </div>
 
-
+    {% block footer %}
     <!-- Footer -->
-    <div id="footer" class="footer_sticky_part">
+    <div id="footer">
         <div class="container">
 
             <div class="row">
@@ -205,8 +211,10 @@ your containt here !!
         </div>
     </div>
     <div id="bottom_backto_top"><a href="#"></a></div>
+    {% endblock %}
 </div>
 
+{% block javascripts %}
 <!-- Scripts -->
 <script src="{{ asset('assets1/scripts/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('assets1/scripts/chosen.min.js') }}"></script>
@@ -218,7 +226,7 @@ your containt here !!
 <script src="{{ asset('assets1/scripts/tooltips.min.js') }}"></script>
 <script src="{{ asset('assets1/scripts/color_switcher.js') }}"></script>
 <script src="{{ asset('assets1/scripts/jquery_custom.js') }}"></script>
-
+{% endblock %}
 
 </body>
 
