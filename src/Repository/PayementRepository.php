@@ -76,8 +76,8 @@ class PayementRepository extends ServiceEntityRepository
         return $query->getResult();*/
         return $this->createQueryBuilder('c')
             ->addSelect('SUM(c.montant) AS sum')
-            ->addSelect('SUBSTRING(c.datePay,1,2) AS date')
-            ->groupBy('c.datePay')
+            ->addSelect('SUBSTRING(c.datePay,7,10) AS date')
+            ->groupBy('date')
             ->getQuery()
             ->getResult()
             ;

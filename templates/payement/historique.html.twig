@@ -10,6 +10,12 @@
 
             <div class="container">
                 <h1>Statistiques</h1>
+                {% for i in x %}
+                    {{ i }}
+                {% endfor %}
+                {% for i in y %}
+                    {{ i }}
+                {% endfor %}
 
                 <canvas id="payements" width="400" height="100"></canvas>
             </div>
