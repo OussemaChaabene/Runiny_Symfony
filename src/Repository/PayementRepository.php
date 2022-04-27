@@ -69,11 +69,6 @@ class PayementRepository extends ServiceEntityRepository
      * @return void
      */
     public function sommeByDate(){
-/*
-        $query = $this->getEntityManager()->createQuery("
-            SELECT DATE_SUB(a.date_pay,MONTH) as date, SUM(a.montant) as sum FROM App\Entity\Payement a GROUP BY date
-        ");
-        return $query->getResult();*/
         return $this->createQueryBuilder('c')
             ->addSelect('SUM(c.montant) AS sum')
             ->addSelect('SUBSTRING(c.datePay,7,10) AS date')

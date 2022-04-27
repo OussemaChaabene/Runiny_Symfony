@@ -34,12 +34,12 @@ class PayController extends AbstractController
 
         // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
         foreach($payements as $payement){
-            $dates[] = (int)$payement['date'];
-            $paySum[] = $payement['sum'];
+            $dates[] = $payement['date'];
+            $paySum[] = (int)$payement['sum'];
         }
 
         return $this->render('payement/historique.html.twig', [
-            'mois' => json_encode($dates),
+            'annee' => json_encode($dates),
             'paySums' => json_encode($paySum),
             'x' =>$dates ,
             'y' =>$paySum ,
