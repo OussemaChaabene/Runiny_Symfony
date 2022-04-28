@@ -44,7 +44,7 @@ class RegimeController extends AbstractController
             $request->query->getInt('page', 1),
             5
         );
-        return  $this->render('regime/index.html.twig',[ 'form' =>$form->createView(), 'regimes' => $pl]);
+        return  $this->render('regime/indexf.html.twig',[ 'form' =>$form->createView(), 'regimes' => $pl]);
     }
 
     /**
