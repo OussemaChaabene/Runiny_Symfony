@@ -25,7 +25,6 @@ class PayController extends AbstractController
      */
     public function statistiques(PayementRepository $pr){
 
-
         // On va chercher le nombre d'annonces publiées par date
         $payements = $pr->sommeByDate();
 

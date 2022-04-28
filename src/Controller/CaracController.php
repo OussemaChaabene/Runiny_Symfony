@@ -22,7 +22,7 @@ class CaracController extends AbstractController
     public function index(CaracSportRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-            'carac' => $csr->findOneBy(array('id'=>2)),
+            'carac' => $csr->findOneBy(array('id'=>3)),
         ]);
     }
 
