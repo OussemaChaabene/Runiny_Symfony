@@ -45,6 +45,20 @@ class AbonnementRepository extends ServiceEntityRepository
         }
     }
 
+    public function find_Nb_Rec_Par_Status($type)
+    {
+
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT DISTINCT  count(r.id) FROM   App\Entity\Abonnement r  where r.abType= :abType   '
+        );
+        $query->setParameter('abType', $type);
+        return $query->getResult();
+    }
+
+
+
 
 
 

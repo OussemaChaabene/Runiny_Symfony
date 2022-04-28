@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau des evenement</title>
+</head>
+<body >
+<h1 style="text-align: center; color: red">Trenna</h1>
+<h2 style="text-align: center">Tableau des evenement</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+
+        <th>id</th>
+        <th>ab_nom</th>
+        <th>ab_type</th>
+        <th>ab_prix</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for c in abonnement %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.abNom }}</td>
+            <td>{{ c.abType }}</td>
+            <td>{{ c.abPrix}}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>

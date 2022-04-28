@@ -4,9 +4,15 @@
 
 {% block body %}
     <h1>Categorie</h1>
+    <td>
+        <p style="100px" > <input  id="myInput"  type="text" placeholder="search">
+            <img src="https://img.icons8.com/nolan/344/google-web-search.png" style="width:50px;height:50px;"/></p>
+    </td>
 
     <table class="table">
         <thead>
+        <tbody>
+        <tbody id="myTable">
             <tr>
                 <th>Id</th>
                 <th>AbNom</th>
@@ -16,6 +22,8 @@
             </tr>
         </thead>
         <tbody>
+        <tbody>
+        <tbody id="myTable">
         {% for abonnement in abonnements %}
             <tr>
                 <td>{{ abonnement.id }}</td>
@@ -32,8 +40,30 @@
                 <td colspan="5">Rien a afficher</td>
             </tr>
         {% endfor %}
+        <div class="utf_pagination_container_part margin-top-30 margin-bottom-30">
+            <nav class="pagination">
+                {{ knp_pagination_render(abonnements) }}
+
+            </nav>
+        </div>
+        </tbody>
+        <tbody id="search">
+
+        </tbody>
         </tbody>
     </table>
+    <a href="{{ path('DownloadProduitsData') }}" class="btn btn-dark waves-effect waves-light">Download PDF</a>
 
     <a href="{{ path('app_abonnement_new') }}">Create new</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 {% endblock %}

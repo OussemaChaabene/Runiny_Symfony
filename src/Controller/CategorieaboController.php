@@ -92,6 +92,7 @@ class CategorieaboController extends AbstractController
             $categorieaboRepository->remove($categorieabo);
         }
 
-        return $this->redirectToRoute('app_categorieabo_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('back', [], Response::HTTP_SEE_OTHER);
     }
+
 }
