@@ -2,8 +2,12 @@
 
 namespace App\metier;
 
+use App\Controller\PayController;
 use App\Entity\CaracSport;
+use App\Entity\Payement;
 use phpDocumentor\Reflection\Types\Integer;
+use Stripe\Checkout\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 class caracMetier
 {
@@ -23,6 +27,7 @@ class caracMetier
         $cs->setProtNeeds($pn);
         return $cs;
     }
+
 
 
 }

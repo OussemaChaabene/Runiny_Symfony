@@ -1,0 +1,42 @@
+{% extends 'basef.html.twig' %}
+
+{% block title %}Plats{% endblock %}
+
+{% block body %}
+
+    <div class="listing_filter_block_a">
+    <div class="col-md-12 margin-bottom-20">
+        {{ form_start(form) }}
+        <div class="main_input_search_part">
+            <div class="main_input_search_part_item">
+                {{ form_row(form.nom) }}
+            </div>
+
+            <button type="submit" class="button">Search</button>
+        </div>
+    </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="row margin-left-2">
+        {% for p in plats %}
+
+        <div class="plan featured col-md-3 col-sm-6 col-xs-12">
+        <div class="utf_price_plan">
+          <img src="/public/assets/images/blog/thumb/img-2.jpg"/>
+        </div>
+        <div class="utf_price_plan_features">
+            <ul>
+                <li><strong>Nom : </strong>{{ p.nom }}</li>
+                <li><strong>Poids : </strong>{{ p.poids }} (g)</li>
+                <li><strong>Proteins : </strong>{{ p.protein }} (g)</li>
+                <li><strong>Sodium : </strong>{{ p.sodium }}</li>
+                <li><strong>Carbohydrate : </strong>{{ p.carbohydrate }}</li>
+                <li><strong>Cholesterol : </strong>{{ p.cholesterol }}</li>
+            </ul>
+
+        </div>
+    </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

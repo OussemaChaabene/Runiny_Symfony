@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Payement;
+use App\Entity\Plat;
+use App\Form\PlatType;
 use App\Repository\PayementRepository;
 use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,13 +29,11 @@ class PayController extends AbstractController
      */
     public function statistiques(PayementRepository $pr){
 
-        // On va chercher le nombre d'annonces publiées par date
         $payements = $pr->sommeByDate();
 
         $dates = [];
         $paySum = [];
 
-        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
         foreach($payements as $payement){
             $dates[] = $payement['date'];
             $paySum[] = (int)$payement['sum'];
@@ -44,4 +46,5 @@ class PayController extends AbstractController
             'y' =>$paySum ,
         ]);
     }
+
 }

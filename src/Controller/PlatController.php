@@ -42,13 +42,28 @@ class PlatController extends AbstractController
 
 
     /**
-     * @Route("/plat/try", name="plat_try")
+     * @Route("/plat/f", name="app_plat_f")
      */
-    public function try(): Response
+    public function indexf(Request $request,PlatRepository $pr, PaginatorInterface $paginator): Response
     {
-        return $this->render('front/index.html.twig', [
-            'controller_name' => 'thisController',
-        ]);
+        $propertySearch = new Search();
+        $form = $this->createForm(SearchformType::class,$propertySearch);
+        $form->handleRequest($request);
+
+        $plats= $pr->findAll();
+        if($form->isSubmitted() && $form->isValid()) {
+            $nom = $propertySearch->getNom();
+            if ($nom!="")
+                $plats= $pr->findBy(['nom' => $nom] );
+            else
+                $plats= $pr->findAll();
+        }
+        $pl = $paginator->paginate(
+            $plats,
+            $request->query->getInt('page', 1),
+            5
+        );
+        return  $this->render('plat/indexf.html.twig',[ 'form' =>$form->createView(), 'plats' => $pl]);
     }
     /**
      * @Route("/plat/{id}", name="showPlat")
