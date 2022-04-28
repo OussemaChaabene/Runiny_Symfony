@@ -1,89 +1,83 @@
-{% extends 'basef.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Caracteristiques sportifs{% endblock %}
+{% block title %}Caracteristiques sportifs!{% endblock %}
 
 {% block body %}
-<main id="main" class="main">
+    <main id="main" class="main">
 
+        <div class="pagetitle">
+            <h1>Caracteristiques</h1>
 
-    <div class="col-lg-12 col-md-12">
-        <div class="utf_dashboard_list_box margin-top-0">
-            <h4 class="gray"><i class="sl sl-icon-user"></i> Details</h4>
-            <div class="utf_dashboard_list_box-static">
+        </div><!-- End Page Title -->
 
-                <div class="my-profile">
-                    <div class="row with-forms">
-                        <div class="col-md-4">
-                            <div class="utf_dashboard_stat color-1">
-                                <div class="utf_dashboard_stat_content">
-                                    <h3>{{ carac.taille }}</h3>
-                                    <span>Taille (cm)</span>
-                                </div>
-                                <div class="utf_dashboard_stat_icon"><i class="im im-icon-Ruler"></i></div>
-                            </div>
+        <section class="section profile">
+            <div class="row">
+                <div class="col-xl-4">
+
+                    <div class="card">
+                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                            <h2>{{ carac.user.Nom }} {{ carac.user.Prenom }}</h2>
+
                         </div>
-                        <div class="col-md-4">
-                            <div class="utf_dashboard_stat color-1">
-                                <div class="utf_dashboard_stat_content">
-                                    <h3>{{ carac.poids }}</h3>
-                                    <span>Poids (Kg)</span>
-                                </div>
-                                <div class="utf_dashboard_stat_icon"><i class="im im-icon-Scale"></i></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="utf_dashboard_stat color-1">
-                                <div class="utf_dashboard_stat_content">
-                                    <h3>{{ carac.age }}</h3>
-                                    <span>ans</span>
-                                </div>
-                                <div class="utf_dashboard_stat_icon"><i class="im im-icon-Cake"></i></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="utf_dashboard_stat color-1">
-                                <div class="utf_dashboard_stat_content">
-                                    <h3>{{ carac.genre }}</h3>
-                                    <span>Sexe</span>
-                                </div>
-                                <div class="utf_dashboard_stat_icon">
-                                    {% if  carac.genre == 'femme' %}
-                                    <i class="im im-icon-Female-Sign"></i>
-                                        {% else %}
-                                    <i class="im im-icon-Male-Sign"></i>
-                                    {% endif %}
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-
-                            <div class="utf_dashboard_stat color-1">
-                                <div class="utf_dashboard_stat_content">
-                                    <h3>{{ carac.calorieNeed }}</h3>
-                                    <span>Besoins calories </span>
-                                    <span>(Kcal/jour) </span>
-
-                                </div>
-                                <div class="utf_dashboard_stat_icon"><i class="im im-icon-Fire-Flame"></i></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="utf_dashboard_stat color-1">
-                                <div class="utf_dashboard_stat_content">
-                                    <h3>{{ carac.protNeeds }}</h3>
-                                    <span>Besoins proteins </span>
-                                    <span>(g/jour) </span>
-
-                                </div>
-                                <div class="utf_dashboard_stat_icon"><i class="im im-icon-weight-Lift"></i></div>
-                            </div>
-                        </div>
-
                     </div>
+
+                </div>
+
+                <div class="col-xl-8">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <div class="tab-content pt-2">
+
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                    <h5 class="card-title">Details</h5>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label ">Taille</div>
+                                        <div class="col-lg-9 col-md-8">{{ carac.taille }}   <a><strong>(cm)</strong></a></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Poids</div>
+                                        <div class="col-lg-9 col-md-8">{{ carac.poids }}   <a><strong>(kg)</strong></a></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Age</div>
+                                        <div class="col-lg-9 col-md-8">{{ carac.age }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Genre</div>
+                                        <div class="col-lg-9 col-md-8">{{ carac.genre }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Besoins Calories</div>
+                                        <div class="col-lg-9 col-md-8">{{ carac.calorieNeed }}   <a><strong>(Kcal/jour)</strong></a></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Besoins Protein</div>
+                                        <div class="col-lg-9 col-md-8">{{ carac.protNeeds}}   <a><strong>(g/jour)</strong></a></div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div><!-- End Bordered Tabs -->
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </div>
-</main><!-- End #main -->
+        </section>
+
+    </main><!-- End #main -->
 {% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Caracteristiques sportifs!{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+        <div class="card top-selling overflow-auto">
+
+
+            <div class="card-body pb-0">
+                <h5 class="card-title">Caracteristiques sportifs <span>| Today</span></h5>
+
+                <table class="table table-borderless">
+                    <thead class="bg-light">
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Taille</th>
+                        <th scope="col">Poids</th>
+                        <th scope="col">Sexe</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Besoins calories (kcal/jour)</th>
+                        <th scope="col">Besoins proteins (g/jour)</th>
+                        <th scope="col">Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for c in caracs %}
+                    <tr>
+                        <td>{{ c.user.Nom }}</td>
+                        <td>{{ c.taille }}</td>
+                        <td>{{ c.poids }}</td>
+                        <td>{{ c.genre }}</td>
+                        <td>{{ c.age }}</td>
+                        <td>{{ c.calorieNeed }}</td>
+                        <td>{{ c.protNeeds }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example" style="width: 20%">
+                                <a  href="{{ path('modifCarac', {'id': c.id}) }}"  type="button"  class="btn btn-primary">Modifier</a>
+                                <a  href="{{ path('suppCarac' , {'id': c.id}) }}"  type="button" class="btn btn-primary" >Supprimer</a>
+                                <a  href="{{ path('c_show' , {'id': c.id}) }}"  type="button" class="btn btn-primary">Afficher</a>
+
+                            </div>
+
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </main><!-- End #main -->
+{% endblock %}

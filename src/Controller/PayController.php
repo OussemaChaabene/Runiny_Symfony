@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Payement;
 use App\Entity\Plat;
 use App\Form\PlatType;
+use App\Repository\CaracSportRepository;
 use App\Repository\PayementRepository;
 use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,9 +28,12 @@ class PayController extends AbstractController
     /**
      * @Route("/stats", name="stats")
      */
-    public function statistiques(PayementRepository $pr){
+    public function statistiques(PayementRepository $pr,CaracSportRepository $cr){
 
         $payements = $pr->sommeByDate();
+        $total = $pr->somme();
+        $nb = $cr->nombreUsers();
+        $nbp=$pr->nbp();
 
         $dates = [];
         $paySum = [];
@@ -42,8 +46,9 @@ class PayController extends AbstractController
         return $this->render('payement/historique.html.twig', [
             'annee' => json_encode($dates),
             'paySums' => json_encode($paySum),
-            'x' =>$dates ,
-            'y' =>$paySum ,
+            'total' =>$total,
+            'nb' =>$nb ,
+            'nbp' =>$nbp ,
         ]);
     }
 

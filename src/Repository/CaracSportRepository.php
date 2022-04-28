@@ -51,6 +51,19 @@ class CaracSportRepository extends ServiceEntityRepository
             ->setParameter('idc','%'.$id.'%');
         return $query->getResult();
     }
+
+    /**
+     * Returns numbrer of "CaracSport"
+     * @return void
+     */
+    public function nombreUsers(){
+        return $this->createQueryBuilder('c')
+            ->Select('COUNT(c.taille) AS nb')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return CaracSport[] Returns an array of CaracSport objects
     //  */

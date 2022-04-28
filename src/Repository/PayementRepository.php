@@ -78,4 +78,28 @@ class PayementRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * Returns sum of "Payement"
+     * @return void
+     */
+    public function somme(){
+        return $this->createQueryBuilder('c')
+            ->Select('SUM(c.montant) AS sums')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * Returns number of "Payement"
+     * @return void
+     */
+    public function nbp(){
+        return $this->createQueryBuilder('c')
+            ->Select('COUNT(c.montant) AS nbp')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

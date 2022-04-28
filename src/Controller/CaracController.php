@@ -21,8 +21,8 @@ class CaracController extends AbstractController
      */
     public function index(CaracSportRepository $csr): Response
     {
-        return $this->render('carac/index.html.twig', [
-            'carac' => $csr->findOneBy(array('id'=>3)),
+        return $this->render('carac/showAll.html.twig', [
+            'caracs' => $csr->findAll(),
         ]);
     }
 
@@ -52,9 +52,19 @@ class CaracController extends AbstractController
     }
 
     /**
-     * @Route("/carac/{id}", name="club_show", methods={"GET"})
+     * @Route("/carac/f/{id}", name="c_show_f", methods={"GET"})
      */
-    public function show(CaracSportRepository $csr,$id): Response
+    public function showcf(CaracSportRepository $csr,$id): Response
+    {
+        return $this->render('carac/indexf.html.twig', [
+            'carac' => $csr->findOneBy(array('id'=>$id)),
+        ]);
+    }
+
+    /**
+     * @Route("/carac/{id}", name="c_show", methods={"GET"})
+     */
+    public function showc(CaracSportRepository $csr,$id): Response
     {
         return $this->render('carac/index.html.twig', [
             'carac' => $csr->findOneBy(array('id'=>$id)),
@@ -80,17 +90,18 @@ class CaracController extends AbstractController
     {
         $carac = $this->getDoctrine()->getManager()->getRepository(CaracSport::class)->find($id);
 
-        $form = $this->createForm(PlatType::class,$carac);
+        $form = $this->createForm(CaracType::class,$carac);
 
         $form->handleRequest($request);
 
+        $cm = new caracMetier();
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $em->flush($cm->calculCarac($carac));
 
             return $this->redirectToRoute('app_carac');
         }
-        return $this->render('plat/updateCarac.html.twig',['f'=>$form->createView()]);
+        return $this->render('carac/updateCarac.html.twig',['f'=>$form->createView()]);
 
     }
 }
