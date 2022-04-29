@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\CaracSport;
 use App\Entity\Plat;
+use App\Entity\Search;
 use App\Form\CaracType;
 use App\Form\PlatType;
+use App\Form\SearchformType;
 use App\metier\caracMetier;
 use App\Repository\CaracSportRepository;
 use App\Repository\PlatRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class CaracController extends AbstractController
 {
     /**
-     * @Route("/carac", name="app_carac")
+     * @Route(", name="app_carac")
      */
-    public function index(CaracSportRepository $csr): Response
+    public function index(CaracSportRepository $csr,Request $request, PaginatorInterface $paginator): Response
     {
+        $propertySearch = new Search();
+        $form = $this->createForm(SearchformType::class,$propertySearch);
+        $form->handleRequest($request);
+
+        $caracs= $csr->findAll();
+
+        $pl = $paginator->paginate(
+            $caracs,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('carac/showAll.html.twig', [
-            'caracs' => $csr->findAll(),
-        ]);
+           'form' =>$form->createView(), 'caracs' => $pl]);
     }
 
     /**

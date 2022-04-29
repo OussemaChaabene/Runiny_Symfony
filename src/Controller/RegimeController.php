@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegimeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_regime_index", methods={"GET", "POST"})
+     * @Route("/f", name="app_regime_index", methods={"GET", "POST"})
      */
     public function index(Request $request, RegimeRepository $rr, PaginatorInterface $paginator): Response
     {
@@ -46,7 +46,30 @@ class RegimeController extends AbstractController
         );
         return  $this->render('regime/indexf.html.twig',[ 'form' =>$form->createView(), 'regimes' => $pl]);
     }
+    /**
+     * @Route("/", name="app_regime_index_b", methods={"GET", "POST"})
+     */
+    public function indexb(Request $request, RegimeRepository $rr, PaginatorInterface $paginator): Response
+    {
+        $propertySearch = new Search();
+        $form = $this->createForm(SearchformType::class,$propertySearch);
+        $form->handleRequest($request);
 
+        $regime= $rr->findAll();
+        if($form->isSubmitted() && $form->isValid()) {
+            $nom = $propertySearch->getNom();
+            if ($nom!="")
+                $regime= $rr->findBy(['titre' => $nom] );
+            else
+                $regime= $rr->findAll();
+        }
+        $pl = $paginator->paginate(
+            $regime,
+            $request->query->getInt('page', 1),
+            5
+        );
+        return  $this->render('regime/index.html.twig',[ 'form' =>$form->createView(), 'regimes' => $pl]);
+    }
     /**
      * @Route("/new", name="app_regime_new", methods={"GET", "POST"})
      */

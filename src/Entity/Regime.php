@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Regime
@@ -32,14 +33,14 @@ class Regime
 
     /**
      * @var string
-     *
+     *@Assert\NotBlank(message=" Veuillez saisir un type")
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
      * @var int
-     *
+     *@Assert\NotBlank(message=" Veuillez saisir un niveau")
      * @ORM\Column(name="niveau", type="integer", nullable=false)
      */
     private $niveau;
