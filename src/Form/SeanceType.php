@@ -2,29 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Reservation;
+use App\Entity\Seance;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
 
-class Reservation1Type extends AbstractType
+class SeanceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idUser')
-            ->add('idCoach')
             ->add('date')
-            ->add('idSalle')
-
+            ->add('typeSeance')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Reservation::class,
+            'data_class' => Seance::class,
         ]);
     }
 }

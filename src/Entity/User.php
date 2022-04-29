@@ -75,6 +75,13 @@ class User
         return $this->idUser;
     }
 
+    public function setIdUser(?int $idUser): self
+    {
+        $this->idUser = 1;
+
+        return $this;
+    }
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -161,7 +168,8 @@ class User
 
     public function __toString()
     {
-        return $this->nom;
+        return $this->prenom;
+        return $this->idUser;
     }
 
 

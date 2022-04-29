@@ -9,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 /**
  * @Route("/reservation")
  */
@@ -27,6 +28,44 @@ class ReservationController extends AbstractController
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
         ]);
+    }
+
+    /**
+     * @Route("/liste", name="app_reservation_liste", methods={"GET"})
+     */
+    public function liste(EntityManagerInterface $entityManager): Response
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            ->findAll();
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('reservation/liste.html.twig', [
+            'reservations' => $reservations,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+
+
+
     }
 
     /**

@@ -22,23 +22,16 @@ class Seance
     private $idSeance;
 
     /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\Column(name="date", type="integer", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="heur", type="integer", nullable=false)
-     */
-    private $heur;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="type_seance", type="integer", nullable=false)
+     * @ORM\Column(name="type_seance", type="string", length=255, nullable=false)
      */
     private $typeSeance;
 
@@ -47,36 +40,24 @@ class Seance
         return $this->idSeance;
     }
 
-    public function getDate(): ?int
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(int $date): self
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getHeur(): ?int
-    {
-        return $this->heur;
-    }
-
-    public function setHeur(int $heur): self
-    {
-        $this->heur = $heur;
-
-        return $this;
-    }
-
-    public function getTypeSeance(): ?int
+    public function getTypeSeance(): ?string
     {
         return $this->typeSeance;
     }
 
-    public function setTypeSeance(int $typeSeance): self
+    public function setTypeSeance(string $typeSeance): self
     {
         $this->typeSeance = $typeSeance;
 

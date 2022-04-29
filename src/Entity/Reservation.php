@@ -20,11 +20,13 @@ class Reservation
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idReser;
-
     /**
-     * @var int
+     * @var \User
      *
-     * @ORM\Column(name="id_coach", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     * })
      */
     private $idCoach;
 
@@ -70,12 +72,12 @@ class Reservation
         return $this->idReser;
     }
 
-    public function getIdCoach(): ?int
+    public function getIdCoach(): ?User
     {
         return $this->idCoach;
     }
 
-    public function setIdCoach(int $idCoach): self
+    public function setIdCoach(?User $idCoach): self
     {
         $this->idCoach = $idCoach;
 
