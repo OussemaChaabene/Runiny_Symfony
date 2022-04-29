@@ -83,10 +83,32 @@ class RegimeController extends AbstractController
             $entityManager->persist($regime);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_regime_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_regime_index_b', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('regime/new.html.twig', [
+            'regime' => $regime,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="app_regime_new_f", methods={"GET", "POST"})
+     */
+    public function newf(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $regime = new Regime();
+        $form = $this->createForm(RegimeType::class, $regime);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($regime);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_regime_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('regime/newf.html.twig', [
             'regime' => $regime,
             'form' => $form->createView(),
         ]);
