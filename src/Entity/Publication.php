@@ -33,7 +33,7 @@ class Publication
     private $description;
 
     /**
-     * @Assert\NotBlank(message = "Veuilez choisir une image")
+
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
@@ -44,18 +44,20 @@ class Publication
     private $adresse;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datecreation", type="date", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $datecreation='CURRENT_TIMESTAMP';
-    function  __contruct(){
-        $this->datecreation= new \DateTime();
+    private $datecreation = 'CURRENT_TIMESTAMP';
+    function __construct() {
+        $this->datecreation=new \DateTime();
     }
 
-    /*
-
-    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaire", mappedBy="publication",cascade={"remove"}, orphanRemoval=true)
-     *  private $comments;
-     */
+//    /**
+//
+//    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaire", mappedBy="publication",cascade={"remove"}, orphanRemoval=true)
+//     *  private $comments;
+//     */
 
     public function getId(): ?int
     {

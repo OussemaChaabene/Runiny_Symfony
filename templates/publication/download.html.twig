@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau des publication</title>
+</head>
+<body >
+<h1 style="text-align: center; color: red">Trenna</h1>
+<h2 style="text-align: center">Tableau des evenement</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+
+        <th>Nom</th>
+        <th>description</th>
+        <th>adresse</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for c in Publication %}
+        <tr>
+            <td>{{ c.nom }}</td>
+            <td>{{ c.description }}</td>
+            <td>{{ c.adresse }}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>

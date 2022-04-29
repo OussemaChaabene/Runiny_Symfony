@@ -4,6 +4,10 @@
 
 {% block body %}
     <h1>Publication index</h1>
+    <td>
+        <p style="100px" > <input  id="myInput"  type="text" placeholder="search">
+            <img src="https://img.icons8.com/nolan/344/google-web-search.png" style="width:50px;height:50px;"/></p>
+    </td>
 
     <table class="table">
         <thead>
@@ -18,6 +22,8 @@
             </tr>
         </thead>
         <tbody>
+        <tbody>
+        <tbody id="myTable">
         {% for publication in publications %}
             <tr>
                 <td>{{ publication.id }}</td>
@@ -25,7 +31,7 @@
                 <td>{{ publication.description }}</td>
                 <td>{{ publication.image }}</td>
                 <td>{{ publication.adresse }}</td>
-                <td>{{ publication.datecreation ? publication.datecreation|date('Y-m-d') : '' }}</td>
+
                 <td>
                     <a href="{{ path('app_publication_show', {'id': publication.id}) }}">show</a>
                     <a href="{{ path('app_publication_edit', {'id': publication.id}) }}">edit</a>
@@ -37,7 +43,21 @@
             </tr>
         {% endfor %}
         </tbody>
+        <tbody id="search">
+        </tbody>
     </table>
+    <a href="{{ path('DownloadProduitsData') }}" class="btn btn-dark waves-effect waves-light">Download PDF</a>
 
     <a href="{{ path('app_publication_new') }}">Create new</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 {% endblock %}

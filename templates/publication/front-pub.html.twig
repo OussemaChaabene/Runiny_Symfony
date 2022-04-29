@@ -18,13 +18,13 @@
                 <div class="col-lg-4">
                     <div class="trainer-item">
                         <div class="image-thumb">
-                            <img src="{{ asset(pub.image) }}" alt="">
+                            <img img  src="{{  asset ("image/#{pub.image}") }}" alt="">
                         </div>
                         <div class="down-content">
                             <span>{{ pub.adresse }}</span>
                             <h4>{{ pub.nom }}</h4>
                             <p>{{ pub.description }}</p>
-                            <span>{{ pub.datecreation|date('Y-m-d') }}</span>
+
                             <a href="{{ path('app_publication_front_show', {'id': pub.id}) }}" class="read-more">Voir Plus <i class="fa fa-angle-right"></i></a>
 
                         </div>
@@ -32,6 +32,10 @@
                 </div>
             </div>
             {% endfor %}
+
+        </div>
+        <div class="pagination">
+            {{ knp_pagination_render(publications) }}
         </div>
     </section>
     <!-- ***** Testimonials Ends ***** -->
