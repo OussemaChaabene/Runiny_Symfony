@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Entity\Seance;
 use App\Form\SeanceType;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +30,40 @@ class SeanceController extends AbstractController
         return $this->render('seance/index.html.twig', [
             'seances' => $seances,
         ]);
+    }
+    public function liste(EntityManagerInterface $entityManager): Response
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $reservations = $entityManager
+            ->getRepository(Seance::class)
+            ->findAll();
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('seance/listseance.html.twig', [
+            'seance' => $seance,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+
+
+
     }
 
     /**

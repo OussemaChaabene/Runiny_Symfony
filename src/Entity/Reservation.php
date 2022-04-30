@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Reservation
  *
@@ -32,9 +32,10 @@ class Reservation
 
     /**
      * @var \DateTime
-     *
+     * #[Assert\GreaterThan('now ')]
      * @ORM\Column(name="date", type="datetime", nullable=false)
      */
+
     private $date;
 
     /**
@@ -130,6 +131,9 @@ class Reservation
 
         return $this;
     }
-
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+    }
 
 }

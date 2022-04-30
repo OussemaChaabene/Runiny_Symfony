@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Reservation;
 use App\Form\Reservation1Type;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Knp\Component\Pager\PaginatorInterface;
+
 /**
  * @Route("/reservation")
  */
@@ -19,12 +20,15 @@ class ReservationController extends AbstractController
     /**
      * @Route("/", name="app_reservation_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request,EntityManagerInterface $entityManager,PaginatorInterface $paginator): Response
     {
         $reservations = $entityManager
             ->getRepository(Reservation::class)
             ->findAll();
-
+        $reservations = $paginator->paginate(
+            $reservations,
+            $request->query->getInt('page', 1),
+            3);
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
         ]);
@@ -75,6 +79,7 @@ class ReservationController extends AbstractController
     {
         $reservation = new Reservation();
         $form = $this->createForm(Reservation1Type::class, $reservation);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

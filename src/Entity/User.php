@@ -75,12 +75,6 @@ class User
         return $this->idUser;
     }
 
-    public function setIdUser(?int $idUser): self
-    {
-        $this->idUser = 1;
-
-        return $this;
-    }
 
     public function getNom(): ?string
     {
