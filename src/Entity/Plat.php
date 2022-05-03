@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Plat
  *
@@ -21,6 +21,7 @@ class Plat
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -28,7 +29,7 @@ class Plat
      * @var string
      * @Assert\NotBlank(message=" Veuillez saisir un nom")
      *
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
@@ -37,7 +38,7 @@ class Plat
      * @var int
      * @Assert\NotNull(message=" Veuillez saisir un poids")
      *
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="poids", type="integer", nullable=false)
      */
     private $poids;
@@ -46,7 +47,7 @@ class Plat
      * @var int
      * @Assert\NotNull(message=" Veuillez saisir la quantité de sodium")
      *
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="sodium", type="integer", nullable=false)
      */
     private $sodium;
@@ -55,7 +56,7 @@ class Plat
      * @var int
      * @Assert\NotNull(message=" Veuillez saisir la quantité de cholesterol")
      *
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="cholesterol", type="integer", nullable=false)
      */
     private $cholesterol;
@@ -64,7 +65,7 @@ class Plat
      * @var int
      * @Assert\NotNull(message=" Veuillez saisir la quantité de carbohydrate")
      *
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="carbohydrate", type="integer", nullable=false)
      */
     private $carbohydrate;
@@ -73,7 +74,7 @@ class Plat
      * @var int
      * @Assert\NotNull(message=" Veuillez saisir la quantité de protein")
      *
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="protein", type="integer", nullable=false)
      */
     private $protein;
@@ -82,7 +83,7 @@ class Plat
      * @var int
      * @Assert\NotNull(message=" Veuillez saisir les calories ")
      *
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="calories", type="integer", nullable=false)
      */
     private $calories;
