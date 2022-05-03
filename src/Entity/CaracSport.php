@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * CaracSport
@@ -18,12 +20,14 @@ class CaracSport
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     *
+     * @Groups("post:read")
      */
     private $id;
 
     /**
      * @var int
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="taille", type="integer", nullable=false)
      */
     private $taille;
@@ -31,6 +35,7 @@ class CaracSport
     /**
      * @var int
      *
+     * @Groups("post:read")
      * @ORM\Column(name="poids", type="integer", nullable=false)
      */
     private $poids;
@@ -47,16 +52,22 @@ class CaracSport
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *
+     * @Groups("post:read")
      */
     private $protNeeds;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *
+     * @Groups("post:read")
      */
     private $calorieNeed;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *
+     * @Groups("post:read")
      */
     private $age;
 
@@ -65,6 +76,8 @@ class CaracSport
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups("post:read")
      */
     private $genre;
 

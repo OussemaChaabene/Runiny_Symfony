@@ -138,7 +138,7 @@ class PlatController extends AbstractController
 //-----------------------------JSON------------------------------------
 
     /**
-     * @Route("/j/plat/all", name="app_plat")
+     * @Route("/j/plat/all", name="app_plat_j")
      */
     public function indexJ(Request $request, PlatRepository $pr, NormalizerInterface $normalizer): Response
     {
@@ -154,7 +154,7 @@ class PlatController extends AbstractController
 
 
     /**
-     * @Route("/j/plat/{id}", name="showPlat")
+     * @Route("/j/plat/{id}", name="showPlat_j")
      * @throws ExceptionInterface
      */
     public function showPlatJ(PlatRepository $pr, $id, NormalizerInterface $normalizer): Response
@@ -168,7 +168,7 @@ class PlatController extends AbstractController
     /**
      * @Route("/j/addPlat", name="addPlat")
      */
-    public function addPlatJ(Request $request, NormalizerInterface $normalizer): Response
+    public function addPlatJ(NormalizerInterface $normalizer): Response
     {
         $plat = new Plat();
 
