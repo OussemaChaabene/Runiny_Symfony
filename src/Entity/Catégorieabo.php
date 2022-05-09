@@ -41,5 +41,34 @@ class Catégorieabo
      */
     private $idUser;
 
+    public function getIdCateg(): ?int
+    {
+        return $this->idCateg;
+    }
+
+    public function getAb(): ?Abonnement
+    {
+        return $this->ab;
+    }
+
+    public function setAb(?Abonnement $ab): self
+    {
+        $this->ab = $ab;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
 
 }

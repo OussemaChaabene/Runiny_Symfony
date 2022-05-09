@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="Login", columns={"Login"})})
+ * @ORM\Table(name="user")
  * @ORM\Entity
  */
 class User
@@ -25,6 +26,11 @@ class User
      * @var string
      *
      * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
+     * @Assert\NotNull(message = "Veuillez ecrire votre nom.")
+     *   @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "[a-zA-Z]+",
+     *     message = "Le nom ne doit contenir que des caractères")
      */
     private $nom;
 
@@ -32,6 +38,11 @@ class User
      * @var string
      *
      * @ORM\Column(name="Prenom", type="string", length=255, nullable=false)
+     * @Assert\NotNull(message = "Veuillez ecrire votre Prenom.")
+     *   @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "[a-zA-Z]+",
+     *     message = "Le prenom ne doit contenir que des caractères")
      */
     private $prenom;
 
@@ -53,6 +64,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="Role", type="string", length=255, nullable=false)
+     * @Assert\NotNull
      */
     private $role;
 
@@ -60,6 +72,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="Login", type="string", length=255, nullable=false)
+     * @Assert\NotNull
      */
     private $login;
 
@@ -67,8 +80,101 @@ class User
      * @var string
      *
      * @ORM\Column(name="Password", type="string", length=255, nullable=false)
+     * @Assert\NotNull
      */
     private $password;
 
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
 
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getDateNais(): ?string
+    {
+        return $this->dateNais;
+    }
+
+    public function setDateNais(string $dateNais): self
+    {
+        $this->dateNais = $dateNais;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->nom;
+        return $this->prenom;
+    }
 }

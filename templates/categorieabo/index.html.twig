@@ -1,0 +1,37 @@
+{% extends 'indexx.html.twig' %}
+
+{% block title %}Abonnement index{% endblock %}
+
+{% block body %}
+    <h1>Abonnement</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in categorieabos %}
+            <tr>
+                <td>{{ a.id }}</td>
+                <td>{{ a.Nom }}</td>
+                <td>{{ a.abonnement }}</td>
+                <td>
+                    <a href="{{ path('app_categorieabo_show', {'id': a.id}) }}">show</a>
+                    <a href="{{ path('app_categorieabo_edit', {'id': a.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Rien a affichier</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorieabo_new') }}">Create new</a>
+{% endblock %}

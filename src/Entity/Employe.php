@@ -49,5 +49,58 @@ class Employe
      */
     private $profession;
 
+    public function getIdEmp(): ?int
+    {
+        return $this->idEmp;
+    }
+
+    public function getDateNais(): ?string
+    {
+        return $this->dateNais;
+    }
+
+    public function setDateNais(string $dateNais): self
+    {
+        $this->dateNais = $dateNais;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getProfession(): ?string
+    {
+        return $this->profession;
+    }
+
+    public function setProfession(string $profession): self
+    {
+        $this->profession = $profession;
+
+        return $this;
+    }
+
 
 }
