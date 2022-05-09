@@ -79,6 +79,22 @@ class PayementRepository extends ServiceEntityRepository
     }
 
     /**
+     * Returns sum of "Payement" per year per id
+     * @return void
+     */
+    public function sommeByDateId($id){
+        return $this->createQueryBuilder('c')
+            ->setParameter('idc',$id)
+            ->addSelect('SUM(c.montant) AS sum')
+            ->addSelect('SUBSTRING(c.datePay,7,10) AS date')
+            ->where('c.idUser=:idc')
+            ->groupBy('date')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * Returns sum of "Payement"
      * @return void
      */

@@ -78,7 +78,7 @@ class CaracController extends AbstractController
     /**
      * @Route("/carac/f/{id}", name="c_show_f", methods={"GET"})
      */
-    public function showcf(CaracSportRepository $csr,$id): Response
+    public function showcf(CaracSportRepository $csr): Response
     {
 
         $id=1;
