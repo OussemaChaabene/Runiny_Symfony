@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Payement;
+use App\Repository\PayementRepository;
 use phpDocumentor\Reflection\Types\Integer;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -25,10 +28,13 @@ class StripeController extends AbstractController
     }
 
     /**
-     * @Route("/checkout", name="checkout")
+     * @Route("/checkout/{p}/{a}", name="checkout")
      */
-    public function checkout(): Response
+    public function checkout(Request $request): Response
     {
+        $p = $request->attributes->get('p');
+        $a = $request->attributes->get('a');
+
         Stripe::setApiKey('sk_test_51KXm6wLAejZKeZY42sNEV6Jnyd4fuDKfQ3vBYkpEaG9S1By5Jmk49lU7GndMSLCsezL0ONL4QjgzfK3sE0aUubBc00SdY1uwBg');
 
 
@@ -39,15 +45,15 @@ class StripeController extends AbstractController
                     'price_data' => [
                         'currency'     => 'eur',
                         'product_data' => [
-                            'name' => 'Abonnement prenuim',
+                            'name' => $a,
                         ],
-                        'unit_amount'  => 3000,
+                        'unit_amount'  => $p,
                     ],
                     'quantity'   => 1,
                 ]
             ],
             'mode'                 => 'payment',
-            'success_url'          => $this->generateUrl('success_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url'          => $this->generateUrl('success_url', ['p'=>$p], UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url'           => $this->generateUrl('cancel_url', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
 
@@ -55,10 +61,21 @@ class StripeController extends AbstractController
     }
 
     /**
-     * @Route("/success-url", name="success_url")
+     * @Route("/success-url/{p}", name="success_url")
      */
-    public function successUrl(): Response
+    public function successUrl(PayementRepository $prp,Request $request/*,UserRespo $up*/): Response
     {
+        $p = new Payement();
+        $pr = $request->attributes->get('p');
+        $p->setMontant($pr);
+
+        $time = new \DateTime();
+        $time->format('m/d/Y');
+
+        $p->setDatePay($time->format('m/d/Y'));
+        
+        /*$p->getIdUser($up->findOneBy(array(sessionid)));*/
+        $prp->add($p);
         return $this->render('payement/success.html.twig', []);
     }
 

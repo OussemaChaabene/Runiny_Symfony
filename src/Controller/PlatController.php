@@ -134,7 +134,6 @@ class PlatController extends AbstractController
 
     }
 
-
 //-----------------------------JSON------------------------------------
 
     /**
@@ -168,11 +167,18 @@ class PlatController extends AbstractController
     /**
      * @Route("/j/addPlat", name="addPlat")
      */
-    public function addPlatJ(NormalizerInterface $normalizer): Response
+    public function addPlatJ(Request $request,NormalizerInterface $normalizer): Response
     {
         $plat = new Plat();
 
         $em = $this->getDoctrine()->getManager();
+        $plat->setNom($request->get('nom'));
+        $plat->setPoids($request->get('poids'));
+        $plat->setSodium($request->get('sod'));
+        $plat->setCholesterol($request->get('chol'));
+        $plat->setCarbohydrate($request->get('carb'));
+        $plat->setCalories($request->get('cal'));
+        $plat->setProtein($request->get('prot'));
         $em->persist($plat);
         $em->flush();
         $c = $normalizer->normalize($plat, 'json', ['groups' => 'post:read']);
@@ -186,6 +192,7 @@ class PlatController extends AbstractController
     public function supprimerPlatJ(Plat $p, NormalizerInterface $normalizer): Response
     {
         $em = $this->getDoctrine()->getManager();
+
         $em->remove($p);
         $em->flush();
         $jsonContent = $normalizer->normalize($p, 'json', ['groups' => 'post:read']);
@@ -199,6 +206,7 @@ class PlatController extends AbstractController
     public function modifierPlatJ($id, Request $request,NormalizerInterface $normalizer): Response
     {
         $plat = $this->getDoctrine()->getManager()->getRepository(Plat::class)->find($id);
+
         $em = $this->getDoctrine()->getManager();
         $plat->setNom($request->get('nom'));
         $plat->setPoids($request->get('poids'));
@@ -214,5 +222,6 @@ class PlatController extends AbstractController
 
 
     }
+
 
 }

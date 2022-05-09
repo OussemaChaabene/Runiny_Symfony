@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class CaracController extends AbstractController
 {
     /**
-     * @Route("/caracs, name="app_carac")
+     * @Route("/caracs", name="app_carac")
      */
     public function index(CaracSportRepository $csr,Request $request, PaginatorInterface $paginator): Response
     {
@@ -38,6 +38,16 @@ class CaracController extends AbstractController
         );
         return $this->render('carac/showAll.html.twig', [
            'form' =>$form->createView(), 'caracs' => $pl]);
+    }
+
+    /**
+     * @Route("/carac/{id}", name="c_show", methods={"GET"})
+     */
+    public function showc(CaracSportRepository $csr,$id): Response
+    {
+        return $this->render('carac/index.html.twig', [
+            'carac' => $csr->findOneBy(array('id'=>$id)),
+        ]);
     }
 
     /**
@@ -70,20 +80,13 @@ class CaracController extends AbstractController
      */
     public function showcf(CaracSportRepository $csr,$id): Response
     {
+
+        $id=1;
         return $this->render('carac/indexf.html.twig', [
-            'carac' => $csr->findOneBy(array('id'=>$id)),
+            'carac' => $csr->findOneBy(array('user'=>$id)),
         ]);
     }
 
-    /**
-     * @Route("/carac/{id}", name="c_show", methods={"GET"})
-     */
-    public function showc(CaracSportRepository $csr,$id): Response
-    {
-        return $this->render('carac/index.html.twig', [
-            'carac' => $csr->findOneBy(array('id'=>$id)),
-        ]);
-    }
 
     /**
      * @Route("/suppCarac/{id}", name="suppCarac")
@@ -136,14 +139,22 @@ class CaracController extends AbstractController
     /**
      * @Route("/j/addCarac", name="addCarac_j")
      */
-    public function addCaracJ(NormalizerInterface $normalizer): Response
+    public function addCaracJ(Request $request,NormalizerInterface $normalizer): Response
     {
-        $carac = new CaracSport();
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($carac);
-        $em->flush();
+        $carac = new CaracSport();
         $c = $normalizer->normalize($carac, 'json', ['groups' => 'post:read']);
+        $em = $this->getDoctrine()->getManager();
+        $carac->setAge((int)$request->get('age'));
+        $carac->setTaille((int)$request->get('taille'));
+        $carac->setPoids((int)$request->get('poids'));
+        $carac->setGenre($request->get('genre'));
+
+        $cm = new caracMetier();
+
+        $em->persist($cm->calculCarac($carac));
+        $em->flush();
+
 
         return new Response(json_encode($c));
     }
@@ -178,11 +189,9 @@ class CaracController extends AbstractController
     {
         $carac = $this->getDoctrine()->getManager()->getRepository(CaracSport::class)->find($id);
         $em = $this->getDoctrine()->getManager();
-        $carac->setProtNeeds($request->get('prot'));
-        $carac->setCalorieNeed($request->get('cal'));
-        $carac->setAge($request->get('age'));
-        $carac->setTaille($request->get('taille'));
-        $carac->setPoids($request->get('poids'));
+        $carac->setAge((int)$request->get('age'));
+        $carac->setTaille((int)$request->get('taille'));
+        $carac->setPoids((int)$request->get('poids'));
         $carac->setGenre($request->get('genre'));
 
         $em->flush();

@@ -27,6 +27,7 @@ class CaracSport
 
     /**
      * @var int
+     *
      * @Groups("post:read")
      * @ORM\Column(name="taille", type="integer", nullable=false)
      */

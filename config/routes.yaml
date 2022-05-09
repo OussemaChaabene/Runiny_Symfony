@@ -1,5 +1,5 @@
 #index:
 #    path: /
-#    controller: App\Controller\DefaultController::index
+#    controller: App\Controller\CaracController::app_carac
 captcha_routing:
   resource: "@CaptchaBundle/Resources/config/routing.yml"
