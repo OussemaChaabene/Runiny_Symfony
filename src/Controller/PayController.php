@@ -52,7 +52,7 @@ class PayController extends AbstractController
             'nbp' =>$nbp ,
         ]);
     }
-
+//-------------------------Json----------------------------------
     /**
      * @Route("/Jstats/{id}", name="j_stats")
      */
