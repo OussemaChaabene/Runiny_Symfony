@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Reservation
  *
@@ -18,6 +19,7 @@ class Reservation
      * @ORM\Column(name="id_reser", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idReser;
     /**
@@ -27,6 +29,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
      * })
+     * @Groups("post:read")
      */
     private $idCoach;
 
@@ -34,6 +37,7 @@ class Reservation
      * @var \DateTime
      * #[Assert\GreaterThan('now ')]
      * @ORM\Column(name="date", type="datetime", nullable=false)
+     * @Groups("post:read")
      */
 
     private $date;
@@ -45,6 +49,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
      * })
+     * @Groups("post:read")
      */
     private $idUser;
 
@@ -65,6 +70,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_salle", referencedColumnName="id_salle")
      * })
+     * @Groups("post:read")
      */
     private $idSalle;
 
@@ -75,6 +81,7 @@ class Reservation
 
     public function getIdCoach(): ?User
     {
+
         return $this->idCoach;
     }
 

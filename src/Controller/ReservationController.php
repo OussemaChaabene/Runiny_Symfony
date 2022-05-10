@@ -11,16 +11,34 @@ use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/reservation")
  */
 class ReservationController extends AbstractController
 {
+    //codename one functions
+
+    /**
+     * @Route("/allReservations", name="AllReservations")
+     */
+    public function allReservations(NormalizerInterface $normalizer): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(reservation::class);
+        $reservations = $repository->findAll();
+        $jsonContent = $normalizer->normalize($reservations, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+
+
+    //Symfony functions
+
+
     /**
      * @Route("/", name="app_reservation_index", methods={"GET"})
      */
-    public function index(Request $request,EntityManagerInterface $entityManager,PaginatorInterface $paginator): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
         $reservations = $entityManager
             ->getRepository(Reservation::class)
@@ -67,9 +85,6 @@ class ReservationController extends AbstractController
         $dompdf->stream("mypdf.pdf", [
             "Attachment" => false
         ]);
-
-
-
     }
 
     /**
@@ -130,11 +145,13 @@ class ReservationController extends AbstractController
      */
     public function delete(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reservation->getIdReser(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $reservation->getIdReser(), $request->request->get('_token'))) {
             $entityManager->remove($reservation);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

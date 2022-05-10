@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Salle
  *
@@ -18,6 +18,7 @@ class Salle
      * @ORM\Column(name="id_salle", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idSalle;
 
@@ -37,7 +38,7 @@ class Salle
 
     /**
      * @var int
-     *
+     *@Groups("post:read")
      * @ORM\Column(name="rating", type="integer", nullable=false)
      */
     private $rating;
