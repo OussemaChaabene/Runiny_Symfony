@@ -5,9 +5,10 @@ namespace App\Entity;
 use App\Repository\CategorieaboRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CategorieaboRepository::class)
+
  */
 class Categorieabo
 {
@@ -15,6 +16,7 @@ class Categorieabo
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -26,11 +28,13 @@ class Categorieabo
      *     htmlPattern = "[a-zA-Z]+",
      *     message = "Le nom ne doit contenir que des caractères")
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $Nom;
 
     /**
      * @ORM\ManyToOne(targetEntity=Abonnement::class, inversedBy="fkCategorie")
+
      */
     private $abonnement;
 

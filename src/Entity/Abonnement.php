@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=AbonnementRepository::class)
@@ -17,6 +19,7 @@ class Abonnement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -28,12 +31,14 @@ class Abonnement
      *     htmlPattern = "[a-zA-Z]+",
      *     message = "Le nom ne doit contenir que des caractères")
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $abNom;
 
     /**
      * @Assert\NotBlank(message = "Veuillez ecrire le type.")
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $abType;
 
@@ -42,11 +47,13 @@ class Abonnement
      * @Assert\Type(type="integer",message = "Prix doit etre un nombre")
      * @Assert\Positive(message = "le prix doit etre positif")
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $abPrix;
 
     /**
      * @ORM\OneToMany(targetEntity=Categorieabo::class, mappedBy="Abonnement")
+
      */
     private $fkCategorie;
 

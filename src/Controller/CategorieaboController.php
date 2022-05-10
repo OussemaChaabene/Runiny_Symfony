@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Categorieabo;
 use App\Form\CategorieaboType;
 use App\Repository\CategorieaboRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/abonnement")
@@ -57,7 +59,7 @@ class CategorieaboController extends AbstractController
     /**
      * @Route("/{id}", name="app_categorieabo_show", methods={"GET"})
      */
-    public function show(Categorieabo $categorieabo): Response
+   public function show(Categorieabo $categorieabo): Response
     {
         return $this->render('categorieabo/show.html.twig', [
             'categorieabo' => $categorieabo,
@@ -94,5 +96,15 @@ class CategorieaboController extends AbstractController
 
         return $this->redirectToRoute('back', [], Response::HTTP_SEE_OTHER);
     }
+   /* /**
+     * @Route("/lili", name="x",methods={"GET"})
+     */
+    /*public function indexMobile(EntityManagerInterface $entityManager,NormalizerInterface $normalizer,CategorieaboRepository  $ar): Response
+    {
 
+        $Abonnements = $ar ->findAll();
+        $abonnement = $normalizer ->normalize($Abonnements,'json',['groups'=>'post:read']);
+
+        return new Response(json_encode($abonnement));
+    }*/
 }

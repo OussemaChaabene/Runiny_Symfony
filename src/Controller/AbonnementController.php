@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Abonnement;
 use App\Form\AbonnementType;
 use App\Repository\AbonnementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,11 @@ use Dompdf\Options;
 use Symfony\Component\Mime\Email;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/categorieabo")
- */
+            */
 class AbonnementController extends AbstractController
 {
     /**
@@ -30,7 +32,7 @@ class AbonnementController extends AbstractController
         $abonnements = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            2 // Nombre de résultats par page
+            4 // Nombre de résultats par page
         );
         return $this->render('abonnement/index.html.twig', [
             'abonnements' =>  $abonnements,
@@ -68,7 +70,7 @@ class AbonnementController extends AbstractController
         ]);
     }
 
-    /**
+   /**
      * @Route("/{id}", name="app_abonnement_show", methods={"GET"})
      */
     public function show(Abonnement $abonnement): Response
@@ -151,8 +153,17 @@ class AbonnementController extends AbstractController
 
         return new Response();
     }
+/*
+    /**
+     * @Route("/lili", name="lili")
+     */
 
+    /*public function indexMobile(EntityManagerInterface $entityManager,NormalizerInterface $normalizer,AbonnementRepository $ar): Response
+    {
 
+        $Abonnements = $ar ->findAll();
+        $abonnement = $normalizer ->normalize($Abonnements,'json',['groups'=>'post:read']);
 
-
+        return new Response(json_encode($abonnement));
+    }*/
 }
