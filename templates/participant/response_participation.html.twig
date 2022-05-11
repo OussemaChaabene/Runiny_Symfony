@@ -1,0 +1,11 @@
+{% extends 'indexx.html.twig' %}
+
+
+{% block title %}Participant index{% endblock %}
+
+{% block body %}
+
+    <p>Votre participation à été effectuée avec succès !</p>
+<a  class="btn btn-outline-primary" href={{ path('app_reservation_liste', {'idEven': event.idEven}) }}">Récupérer votre PDF de participation</a>
+
+{% endblock %}

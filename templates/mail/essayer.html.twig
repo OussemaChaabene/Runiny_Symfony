@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MailController!{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+  </div>
+  <div class=" container text-center"style="font-family: 'Londrina Shadow';">
+      <div class=" text-center" class="text-center"style="font-family: 'Londrina Shadow';">
+      <br><br><br>
+      <div class=" text-center" class=""style="font-family: 'Londrina Shadow';">
+{{ form_start(form) }}
+</div></div>
+<h2 class="text-center" class="text-center"style="font-family: 'Londrina Shadow';">Envoyer un E-mail</h2>
+<br><br>
+
+    {{ form_widget(form) }}
+    <br>
+    
+    <input type="submit" class="btn btn-success ms-auto btn-sm btn-block" value="Envoyer" style="margin-right: 5px; margin-top: 5px;">
+        
+       
+        </div>
+   
+        {{ form_end(form) }}
+
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<form method="post" action="{{ path('app_events_delete', {'ideven': event.ideven}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.ideven) }}">
+    <button class="btn">Delete</button>
+</form>
+<style>li{
+
+    }</style>
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+    {{ form_widget(form) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,26 @@
+{% extends 'indexx.html.twig' %}
+
+{% block title %}Abonnement{% endblock %}
+
+{% block body %}
+    <h1>Abonnement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorieabo.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ categorieabo.Nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorieabo_index') }}">Retour</a>
+
+    <a href="{{ path('app_categorieabo_edit', {'id': categorieabo.id}) }}">edit</a>
+
+    {{ include('categorieabo/_delete_form.html.twig') }}
+{% endblock %}

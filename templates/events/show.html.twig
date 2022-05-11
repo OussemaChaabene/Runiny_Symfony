@@ -1,0 +1,34 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+    <h1>Events</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Date evenement </th>
+                <td>{{ event.dateeven ? event.dateeven|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description </th>
+                <td>{{ event.descri }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ event.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ event.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_events_index') }}">back to list</a>
+
+    <a href="{{ path('app_events_edit', {'ideven': event.ideven}) }}">edit</a>
+
+
+{% endblock %}
