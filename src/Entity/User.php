@@ -2,73 +2,126 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
- * User
- *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="Login", columns={"Login"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     * @groups("post:read")
      */
-    private $idUser;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=180, unique=true)
+     *  @groups("post:read")
      */
-    private $nom;
+    private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Prenom", type="string", length=255, nullable=false)
+     * @ORM\Column(type="json")
+     *  @groups("post:read")
      */
-    private $prenom;
+    private $roles = [];
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Adress", type="string", length=255, nullable=false)
-     */
-    private $adress;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Date_nais", type="string", length=255, nullable=false)
-     */
-    private $dateNais;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Role", type="string", length=255, nullable=false)
-     */
-    private $role;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Login", type="string", length=255, nullable=false)
-     */
-    private $login;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Password", type="string", length=255, nullable=false)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     *  @groups("post:read")
      */
     private $password;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+    public function __toString()
+    {
+        return $this->email;
+    }
 }
