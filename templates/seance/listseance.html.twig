@@ -1,0 +1,21 @@
+{% block body %}
+    <h1>Liste des Seances</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Seance</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ seance.typeSeance }}</td>
+                <td>{{ seance.date ? seance.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
