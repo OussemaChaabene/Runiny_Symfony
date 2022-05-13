@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * Seance
  *
@@ -14,7 +16,7 @@ class Seance
 {
     /**
      * @var int
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="id_seance", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -22,6 +24,7 @@ class Seance
     private $idSeance;
 
     /**
+     * @Groups("post:read")
      * @var \DateTime
      * #[Assert\GreaterThan('now')]
      * @ORM\Column(name="date", type="datetime", nullable=false)
@@ -31,7 +34,7 @@ class Seance
 
     /**
      * @var string
-     *
+     * @Groups("post:read")
      * @ORM\Column(name="type_seance", type="string", length=255, nullable=false)
      */
     private $typeSeance;

@@ -8,16 +8,72 @@ use App\Form\SeanceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/seance")
  */
 class SeanceController extends AbstractController
 {
+//codename one functions
+
+    /**
+     * @Route("/allSeance", name="allseance")
+     */
+    public function allSeance(NormalizerInterface $normalizer): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Seance::class);
+        $Seances = $repository->findAll();
+        $jsonContent = $normalizer->normalize($Seances, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+
+    public function SeanceId(Request $request,$id,NormalizerInterface $normalizer){
+        $em = $this->getDoctrine()->getManager();
+        $seances = $em->getRepository(Seance::class)->find($id);
+
+        $jsonContent = $normalizer->normalize($seances,'json',['groups'=>'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+    /**
+     * @Route("/addSeanceJSON", name="addSeanceJSON")
+     */
+    public function addSeanceJSON(Request $request,NormalizerInterface $normalizer): Response
+    {
+
+        $seance = new Seance();
+        $em = $this->getDoctrine()->getManager();
+        $date=date_create_from_format('Y-m-d',date('Y-m-d',strtotime($request->get('date'))));
+        $seance->setDate($date);
+        $seance->setTypeSeance($request->get('typeSeance'));
+        $em->persist($seance);
+        $em->flush();
+        $jsonContent = $normalizer->normalize($seance, 'json', ['groups' => 'post:read']);
+
+        return new Response(json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("/deleteSeanceJSON/{id}", name="deleteSeanceJSON")
+     */
+    public function deleteSeanceJSON(Request $request,NormalizerInterface $normalizer,$id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $seances = $em->getRepository(Seance::class)->find($id);
+        $em->remove($seances);
+        $em->flush();
+        $jsonContent = $normalizer->normalize($seances, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+
+    //Symfony functions
+
+
     /**
      * @Route("/", name="app_seance_index", methods={"GET"})
      */

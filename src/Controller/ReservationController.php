@@ -30,7 +30,18 @@ class ReservationController extends AbstractController
         $jsonContent = $normalizer->normalize($reservations, 'json', ['groups' => 'post:read']);
         return new Response(json_encode($jsonContent));
     }
-
+    /**
+     * @Route("/deleteReservationsJSON", name="deleteReservationsJSON")
+     */
+    public function deleteReservationsJSON(Request $request,NormalizerInterface $normalizer,$id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $reservations = $em->getRepository(Reservation::class)->find($id);
+        $repository = $this->getDoctrine()->getRepository(reservation::class);
+        $reservations = $repository->findAll();
+        $jsonContent = $normalizer->normalize($reservations, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
 
     //Symfony functions
 
