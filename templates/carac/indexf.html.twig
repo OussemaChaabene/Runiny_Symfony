@@ -1,0 +1,89 @@
+{% extends 'basef.html.twig' %}
+
+{% block title %}Caracteristiques sportifs{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+
+
+        <div class="col-lg-12 col-md-12">
+            <div class="utf_dashboard_list_box margin-top-0">
+                <h4 class="gray"><i class="sl sl-icon-user"></i> {{ carac.user.Nom }} {{ carac.user.Prenom }}</h4>
+                <div class="utf_dashboard_list_box-static">
+
+                    <div class="my-profile">
+                        <div class="row with-forms">
+                            <div class="col-md-4">
+                                <div class="utf_dashboard_stat color-1">
+                                    <div class="utf_dashboard_stat_content">
+                                        <h3>{{ carac.taille }}</h3>
+                                        <span>Taille (cm)</span>
+                                    </div>
+                                    <div class="utf_dashboard_stat_icon"><i class="im im-icon-Ruler"></i></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="utf_dashboard_stat color-1">
+                                    <div class="utf_dashboard_stat_content">
+                                        <h3>{{ carac.poids }}</h3>
+                                        <span>Poids (Kg)</span>
+                                    </div>
+                                    <div class="utf_dashboard_stat_icon"><i class="im im-icon-Scale"></i></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="utf_dashboard_stat color-1">
+                                    <div class="utf_dashboard_stat_content">
+                                        <h3>{{ carac.age }}</h3>
+                                        <span>ans</span>
+                                    </div>
+                                    <div class="utf_dashboard_stat_icon"><i class="im im-icon-Cake"></i></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="utf_dashboard_stat color-1">
+                                    <div class="utf_dashboard_stat_content">
+                                        <h3>{{ carac.genre }}</h3>
+                                        <span>Sexe</span>
+                                    </div>
+                                    <div class="utf_dashboard_stat_icon">
+                                        {% if  carac.genre == 'femme' %}
+                                            <i class="im im-icon-Female-Sign"></i>
+                                        {% else %}
+                                            <i class="im im-icon-Male-Sign"></i>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="utf_dashboard_stat color-1">
+                                    <div class="utf_dashboard_stat_content">
+                                        <h3>{{ carac.calorieNeed }}</h3>
+                                        <span>Besoins calories </span>
+                                        <span>(Kcal/jour) </span>
+
+                                    </div>
+                                    <div class="utf_dashboard_stat_icon"><i class="im im-icon-Fire-Flame"></i></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="utf_dashboard_stat color-1">
+                                    <div class="utf_dashboard_stat_content">
+                                        <h3>{{ carac.protNeeds }}</h3>
+                                        <span>Besoins proteins </span>
+                                        <span>(g/jour) </span>
+
+                                    </div>
+                                    <div class="utf_dashboard_stat_icon"><i class="im im-icon-weight-Lift"></i></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main><!-- End #main -->
+{% endblock %}

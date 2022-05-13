@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PlanningCoach
  *
- * @ORM\Table(name="planning_coach", indexes={@ORM\Index(name="id_seance", columns={"id_seance"}), @ORM\Index(name="id_user", columns={"id_user"})})
+ * @ORM\Table(name="planning_coach", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="id_seance", columns={"id_seance"})})
  * @ORM\Entity
  */
 class PlanningCoach
@@ -22,6 +22,16 @@ class PlanningCoach
     private $idP;
 
     /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
+     * })
+     */
+    private $idUser;
+
+    /**
      * @var \Seance
      *
      * @ORM\ManyToOne(targetEntity="Seance")
@@ -31,15 +41,34 @@ class PlanningCoach
      */
     private $idSeance;
 
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
-     * })
-     */
-    private $idUser;
+    public function getIdP(): ?int
+    {
+        return $this->idP;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getIdSeance(): ?Seance
+    {
+        return $this->idSeance;
+    }
+
+    public function setIdSeance(?Seance $idSeance): self
+    {
+        $this->idSeance = $idSeance;
+
+        return $this;
+    }
 
 
 }

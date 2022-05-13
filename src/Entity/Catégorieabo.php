@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Catégorieabo
  *
- * @ORM\Table(name="catégorieabo", indexes={@ORM\Index(name="ab_id", columns={"ab_id"}), @ORM\Index(name="id_user", columns={"id_user"})})
+ * @ORM\Table(name="catégorieabo", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="ab_id", columns={"ab_id"})})
  * @ORM\Entity
  */
 class Catégorieabo
@@ -40,6 +40,35 @@ class Catégorieabo
      * })
      */
     private $idUser;
+
+    public function getIdCateg(): ?int
+    {
+        return $this->idCateg;
+    }
+
+    public function getAb(): ?Abonnement
+    {
+        return $this->ab;
+    }
+
+    public function setAb(?Abonnement $ab): self
+    {
+        $this->ab = $ab;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
 
 
 }

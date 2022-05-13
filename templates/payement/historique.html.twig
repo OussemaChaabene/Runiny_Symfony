@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique de payements !{% endblock %}
+
+{% block body %}
+    <div class="superx">
+        <div class="container">
+            <h1>Statistiques</h1>
+            <div class="row">
+                <!-- Sales Card -->
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card sales-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Ventes <span></h5>
+
+                            <div class="d-flex align-items-center">
+                                <img class="h-25 w-25" src="assets/checklist.gif">
+                                <div class="ps-3">
+                                    <h2>{% for i in nbp%} {{ i.nbp}} {% endfor %}</h2>
+
+                                </div><span>| ventes</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- End Sales Card -->
+
+                <!-- Revenue Card -->
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card revenue-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Revenues <span>| Total</span></h5>
+
+                            <div class="d-flex align-items-center">
+                                <img class="h-25 w-25" src="assets/money-bag.gif">
+                                <div class="ps-3">
+                                    <h2>{% for i in total%} {{ i.sums}} {% endfor %}</h2>
+
+                                </div><span>| TND</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- End Revenue Card -->
+
+                <!-- Customers Card -->
+                <div class="col-xxl-4 col-xl-12">
+
+                    <div class="card info-card customers-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Utilisateurs </h5>
+
+                            <div class="d-flex align-items-center">
+                                <img class="h-25 w-25" src="assets/customer.gif">
+                                    </img>
+
+                                <div class="ps-3">
+                                    <h2>{% for i in nb%} {{ i.nb}} {% endfor %}</h2>
+
+                                </div><span>| utilisateurs</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div><!-- End Customers Card -->
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Revenus</h5>
+
+                    <canvas id="lineChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 289.6px; width: 580px;" width="725" height="362"></canvas>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            new Chart(document.querySelector('#lineChart'), {
+                                type: 'bar',
+                                data: {
+                                    labels: {{ annee|raw }},
+                                    datasets: [{
+                                        label: 'Revenus par an',
+                                        data: {{ paySums|raw }},
+                                    }],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)',
+                                        'rgba(255, 205, 86, 0.2)',
+
+                                    ],
+                                    borderColor: [
+                                        'rgb(255, 99, 132)',
+                                        'rgb(255, 159, 64)',
+                                        'rgb(255, 205, 86)',
+
+                                    ],
+                                    borderWidth: 1
+                                }
+                            });
+                        });
+                    </script>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

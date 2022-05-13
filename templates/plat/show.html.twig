@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Caracteristiques sportifs!{% endblock %}
+
+{% block body %}
+    <div class="superx">
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Plat</h1>
+
+        </div><!-- End Page Title -->
+
+        <section class="section profile">
+            <div class="row">
+                <div class="col">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="assets/images/blog/thumb/img-1.jpg">
+                                </div>
+                                <div class="col-7">
+                                    <div class="tab-content pt-2">
+
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                    <h5 class="card-title">Details</h5>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label ">nom</div>
+                                        <div class="col-lg-9 col-md-8">{{ plat.nom }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Poids</div>
+                                        <div class="col-lg-9 col-md-8">{{ plat.poids }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Sodium</div>
+                                        <div class="col-lg-9 col-md-8">{{ plat.sodium }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Cholesterol</div>
+                                        <div class="col-lg-9 col-md-8">{{ plat.cholesterol }}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Carbohydrate</div>
+                                        <div class="col-lg-9 col-md-8">{{ plat.carbohydrate}}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Protein</div>
+                                        <div class="col-lg-9 col-md-8">{{ plat.protein}}</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Calories</div>
+                                        <div class="col-lg-9 col-md-8">{{ plat.calories}}</div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div><!-- End Bordered Tabs -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main><!-- End #main --></div>
+{% endblock %}

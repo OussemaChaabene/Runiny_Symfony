@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PlatController!{% endblock %}
+
+{% block body %}
+    <div class="superx">
+    <section class="section">
+        <div class="row">
+            <div class="row-cols-lg-auto">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Plats Disponibles</h5>
+
+                        <!-- Table with stripped rows -->
+                        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns" >
+
+                                {{ form_start(form) }}
+                                <div class="row  position-absolute top-0 end-0">
+                                    <div class="col">
+                                <div class="dataTable-search" >{{ form_row(form.nom) }}</div>
+                                        </div>
+                                        <div class="col mt-4">
+                                            <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+
+                            <div class="dataTable-container mt-5">
+                                <table class="table datatable dataTable-table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">Nom</a></th>
+                                        <th scope="col" data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">Poids</a></th>
+                                        <th scope="col" data-sortable="" style="width: 10.9842%;"><a href="#" class="dataTable-sorter">Calories</a></th>
+                                        <th scope="col" data-sortable="" style="width: 12.1125%;"><a href="#" class="dataTable-sorter">Protein</a></th>
+                                        <th scope="col" data-sortable="" style="width: 12%;"><a href="#" class="dataTable-sorter">Sodium</a></th>
+                                        <th scope="col" data-sortable="" style="width: 19.1125%;"><a href="#" class="dataTable-sorter">Carbohydrate</a></th>
+                                        <th scope="col" data-sortable="" style="width: 19.1125%;"><a href="#" class="dataTable-sorter">Cholesterol</a></th>
+                                        <th scope="col"  style="width: 20%; position: center"><a class="dataTable">Action</a></th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for p in plats %}
+                                    <tr>
+                                        <td>{{ p.nom }}</td>
+                                        <td>{{ p.poids }}</td>
+                                        <td>{{ p.calories }}</td>
+                                        <td>{{ p.protein }}</td>
+                                        <td>{{ p.sodium }}</td>
+                                        <td>{{ p.carbohydrate }}</td>
+                                        <td>{{ p.cholesterol }}</td>
+                                        <td><div class="btn-group" role="group" aria-label="Basic example" style="width: 20%">
+                                                <a  href="{{ path('modifPlat', {'id': p.id}) }}"  type="button"  class="btn btn-primary">Modifier</a>
+                                                <a  href="{{ path('suppPlat' , {'id': p.id}) }}"  type="button" class="btn btn-primary" >Supprimer</a>
+                                                <a  href="{{ path('showPlat' , {'id': p.id}) }}"  type="button" class="btn btn-primary">Afficher</a>
+
+                                            </div></td>
+                                    </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="6">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table></div>
+                            {{ knp_pagination_render(plats) }}
+                            <div class="dataTable-bottom"><nav class="dataTable-pagination"><ul class="dataTable-pagination-list"></ul></nav></div>
+                        </div>
+                        <a href="{{ path('addPlat') }}" ><button type="button" class="btn btn-primary">Ajouter</button></a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PlatController!{% endblock %}
+
+{% block body %}
+    <div class="superx">
+        <section class="section">
+            <div class="row">
+                <div class="row-cols-lg-auto">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Regimes Disponibles</h5>
+
+                            <!-- Table with stripped rows -->
+                            <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns" >
+
+                                {{ form_start(form) }}
+                                <div class="row  position-absolute top-0 end-0">
+                                    <div class="col">
+                                        <div class="dataTable-search" >{{ form_row(form.nom) }}</div>
+                                    </div>
+                                    <div class="col mt-4">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+
+                                <div class="dataTable-container mt-5">
+                                    <table class="table datatable dataTable-table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" data-sortable="" style="width: 20%;"><a href="#" class="dataTable-sorter">Nom</a></th>
+                                            <th scope="col" data-sortable="" style="width: 10%;"><a href="#" class="dataTable-sorter">type</a></th>
+                                            <th scope="col" data-sortable="" style="width: 10.9842%;"><a href="#" class="dataTable-sorter">niveau</a></th>
+
+                                            <th scope="col"  style="width: 20%; position: center"><a class="dataTable">Action</a></th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for p in regimes %}
+                                            <tr>
+                                                <td>{{ p.titre }}</td>
+                                                <td>{{ p.type }}</td>
+                                                <td>{{ p.niveau }}</td>
+
+                                                <td><div class="btn-group" role="group" aria-label="Basic example" style="width: 20%">
+                                                        <a  href="{{ path('app_regime_show', {'id': p.id}) }}"  type="button"  class="btn btn-primary">Afficher</a>
+                                                        <a  href="{{ path('app_regime_edit' , {'id': p.id}) }}"  type="button" class="btn btn-primary" >Modifier</a>
+                                                        <a  href="{{ path('app_regime_delete' , {'id': p.id}) }}"  type="button" class="btn btn-primary">Supprimer</a>
+
+                                                    </div></td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table></div>
+                                {{ knp_pagination_render(regimes) }}
+                                <div class="dataTable-bottom"><nav class="dataTable-pagination"><ul class="dataTable-pagination-list"></ul></nav></div>
+                            </div>
+                            <a href="{{ path('app_regime_new') }}" ><button type="button" class="btn btn-primary">Ajouter</button></a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
