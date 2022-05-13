@@ -5,21 +5,21 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Participant
+ * Catã©gorieabo
  *
- * @ORM\Table(name="participant", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="id_even", columns={"id_even"})})
+ * @ORM\Table(name="catÃ©gorieabo", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="ab_id", columns={"ab_id"})})
  * @ORM\Entity
  */
-class Participant
+class Catã©gorieabo
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id_parti", type="integer", nullable=false)
+     * @ORM\Column(name="id_categ", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idParti;
+    private $idCateg;
 
     /**
      * @var \User
@@ -32,18 +32,18 @@ class Participant
     private $idUser;
 
     /**
-     * @var \Evenement
+     * @var \Abonnement
      *
-     * @ORM\ManyToOne(targetEntity="Evenement")
+     * @ORM\ManyToOne(targetEntity="Abonnement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_even", referencedColumnName="id_even")
+     *   @ORM\JoinColumn(name="ab_id", referencedColumnName="ab_id")
      * })
      */
-    private $idEven;
+    private $ab;
 
-    public function getIdParti(): ?int
+    public function getIdCateg(): ?int
     {
-        return $this->idParti;
+        return $this->idCateg;
     }
 
     public function getIdUser(): ?User
@@ -58,14 +58,14 @@ class Participant
         return $this;
     }
 
-    public function getIdEven(): ?Evenement
+    public function getAb(): ?Abonnement
     {
-        return $this->idEven;
+        return $this->ab;
     }
 
-    public function setIdEven(?Evenement $idEven): self
+    public function setAb(?Abonnement $ab): self
     {
-        $this->idEven = $idEven;
+        $this->ab = $ab;
 
         return $this;
     }
